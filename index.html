@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ibrahim Kakaev, développeur fullstack et DevOps</title>
+  <meta name="description" content="Étudiant en Master 2 Ingénierie logicielle à Avignon Université, à la recherche d'un stage de fin d'études de 6 mois à partir de janvier 2027.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#projets">Aller aux projets</a>
+
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <h1 class="name">Ibrahim<br>Kakaev</h1>
+      <div class="hero-side">
+        <p class="role">Développeur fullstack et DevOps, en Master 2 Ingénierie logicielle à Avignon Université.</p>
+        <p class="availability"><span class="dot" aria-hidden="true"></span>Je cherche un stage de fin d'études de 6 mois, à Toulouse ou à Albi, à partir de janvier 2027.</p>
+        <p class="hero-links">
+          <a href="#contact">Me contacter</a>
+          <a href="https://github.com/IbrahimKakaevCERI">GitHub</a>
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="projets" class="section">
+      <div class="wrap">
+        <h2>Projets</h2>
+
+        <div class="projects">
+          <details class="project" open>
+            <summary>
+              <span class="p-title">CERISoNet</span>
+              <span class="p-line">Un réseau social web avec fil d'actualité et utilisateurs connectés en temps réel.</span>
+              <span class="p-stack">Angular 17, Node.js, Express, Socket.IO, PostgreSQL, MongoDB, Docker</span>
+            </summary>
+            <div class="p-body">
+              <p>Les utilisateurs se connectent, publient des posts avec hashtags et image, puis les likent, les commentent et les partagent. La liste des personnes en ligne se met à jour en direct grâce à Socket.IO.</p>
+              <p>PostgreSQL stocke les comptes. MongoDB stocke les posts, les commentaires et les sessions. Une seule commande, <code>npm run demo</code>, lance l'application et les deux bases avec Docker Compose.</p>
+              <p><a href="https://github.com/IbrahimKakaevCERI/CERISoNet">Voir le code sur GitHub</a></p>
+            </div>
+          </details>
+
+          <details class="project">
+            <summary>
+              <span class="p-title">Bot Telegram de montage vidéo MMA</span>
+              <span class="p-line">Un bot qui télécharge, découpe et monte des vidéos de combats.</span>
+              <span class="p-stack">Python, FFmpeg, MoviePy, OpenCV, librosa, yt-dlp</span>
+            </summary>
+            <div class="p-body">
+              <p>Le bot détecte les scènes d'une vidéo, la découpe en séquences et propose plusieurs modes de téléchargement. Je l'utilise pour produire du contenu autour des sports de combat.</p>
+              <p>C'est un projet personnel, né d'un besoin réel : automatiser un montage que je faisais à la main.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="parcours" class="section">
+      <div class="wrap">
+        <h2>Parcours</h2>
+        <ol class="timeline">
+          <li>
+            <span class="when">2024 à aujourd'hui</span>
+            <div>
+              <h3>Master Informatique, Ingénierie logicielle</h3>
+              <p>Avignon Université (CERI), parcours ILSEN</p>
+            </div>
+          </li>
+          <li>
+            <span class="when">2020 à 2025</span>
+            <div>
+              <h3>Animateur jeunesse et référent</h3>
+              <p>CROUS, Grand Albigeois et Handiligue. Encadrement de groupes, organisation d'activités, responsabilité d'une équipe sur le terrain.</p>
+            </div>
+          </li>
+          <li>
+            <span class="when">2021 à 2024</span>
+            <div>
+              <h3>Licence Informatique, option Technologie du Web</h3>
+              <p>INU Champollion, Albi</p>
+            </div>
+          </li>
+          <li>
+            <span class="when">2019 à 2021</span>
+            <div>
+              <h3>Baccalauréat, spécialités Informatique et Anglais</h3>
+              <p>Lycée Lapérouse, Albi</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="competences" class="section">
+      <div class="wrap">
+        <h2>Compétences</h2>
+        <dl class="skills">
+          <dt>Langages</dt>
+          <dd>Java, Python, TypeScript et JavaScript, C++ (multithreading, calcul GPU), Rust, OCaml, PHP</dd>
+          <dt>Web</dt>
+          <dd>Angular, RxJS, Node.js et Express, Socket.IO, Spring Boot, conception d'API REST</dd>
+          <dt>Données</dt>
+          <dd>PostgreSQL, MySQL, MongoDB</dd>
+          <dt>Déploiement</dt>
+          <dd>Docker et Docker Compose, Linux (Ubuntu), Git et GitHub, CI/CD, Apache, notions d'AWS</dd>
+          <dt>Tests</dt>
+          <dd>JUnit, Jest, PyTest, notions de tests d'intrusion avec Kali Linux</dd>
+          <dt>Méthodes</dt>
+          <dd>Scrum, Jira, UML</dd>
+          <dt>Langues</dt>
+          <dd>Français (langue maternelle), russe (courant), anglais (B1)</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="wrap">
+        <h2>Contact</h2>
+        <p class="contact-lead">Un stage, une question sur un projet ou une mission ? Écrivez-moi, je réponds vite.</p>
+        <ul class="contact-list">
+          <li><a href="mailto:ton.email@exemple.fr">ton.email@exemple.fr</a></li>
+          <li><a href="https://github.com/IbrahimKakaevCERI">github.com/IbrahimKakaevCERI</a></li>
+          <li><a href="https://www.linkedin.com/in/ton-profil/">LinkedIn</a></li>
+          <li><a href="cv.pdf">Télécharger mon CV (PDF)</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>Ibrahim Kakaev, Albi et Avignon. Permis B.</p>
+    </div>
+  </footer>
+</body>
+</html>
