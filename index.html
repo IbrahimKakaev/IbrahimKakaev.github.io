@@ -5,163 +5,132 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ibrahim Kakaev, développeur full-stack</title>
   <meta name="description" content="Étudiant en Master 2 Ingénierie logicielle à Avignon Université. Développeur full-stack à la recherche d'un stage de fin d'études de 6 mois à partir de janvier 2027, à Toulouse ou Albi.">
-  <meta name="theme-color" content="#eef2ef">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='25,6 75,6 100,50 75,94 25,94 0,50' fill='%23d9482b'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Literata:ital,opsz,wght@0,7..72,400..600;1,7..72,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Literata:ital,opsz,wght@0,7..72,400..600;1,7..72,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <a class="skip" href="#projets">Aller aux projets</a>
 
-  <nav class="topbar" aria-label="Sections">
-    <div class="wrap topbar-inner">
-      <a class="mark" href="#top" aria-label="Haut de page">
-        <svg viewBox="0 0 100 100" aria-hidden="true"><polygon points="25,6 75,6 100,50 75,94 25,94 0,50"/></svg>
-        <span>IK</span>
-      </a>
-      <ol class="nav-links">
-        <li><a href="#projets"><span class="idx">01</span><span class="lbl">Projets</span></a></li>
-        <li><a href="#experience"><span class="idx">02</span><span class="lbl">Expérience</span></a></li>
-        <li><a href="#competences"><span class="idx">03</span><span class="lbl">Compétences</span></a></li>
-        <li><a href="#formation"><span class="idx">04</span><span class="lbl">Formation</span></a></li>
-        <li><a href="#contact"><span class="idx">05</span><span class="lbl">Contact</span></a></li>
-      </ol>
-    </div>
-  </nav>
-
-  <header class="hero" id="top">
+  <header class="hero">
     <div class="wrap hero-grid">
       <div class="hero-text">
-        <p class="kicker">Portfolio · Stage de fin d'études · 2027</p>
-        <h1 class="name"><span>Ibrahim</span><span class="outline">Kakaev</span></h1>
+        <h1 class="name">Ibrahim<br>Kakaev</h1>
         <p class="role">Développeur full-stack, en Master 2 Ingénierie logicielle à Avignon Université.</p>
         <p class="pitch">Passionné par le web moderne et les architectures robustes, je veux m'investir dans des projets techniques exigeants.</p>
         <p class="availability">
-          <span class="pulse" aria-hidden="true"></span>
-          <span>Je cherche un stage de fin d'études de 6 mois à <strong>Toulouse ou Albi</strong>, à partir de <strong>janvier 2027</strong>. Disponible immédiatement, début anticipé possible.</span>
+          <span class="dot" aria-hidden="true"></span>
+          Je cherche un stage de fin d'études de 6 mois à Toulouse ou à Albi, à partir de janvier 2027. Disponible immédiatement, début anticipé possible.
         </p>
-        <p class="actions">
-          <a class="btn btn-solid" href="cv-ibrahim-kakaev.pdf" download="CV-Ibrahim-Kakaev.pdf">Télécharger mon CV</a>
-          <a class="btn" href="#contact">Me contacter</a>
-          <a class="btn btn-ghost" href="https://github.com/IbrahimKakaev">GitHub</a>
+        <p class="hero-links">
+          <a href="#contact">Me contacter</a>
+          <a href="cv-ibrahim-kakaev.pdf">Télécharger mon CV</a>
+          <a href="https://github.com/IbrahimKakaev">GitHub</a>
         </p>
       </div>
-      <figure class="board-wrap">
-        <svg id="board" class="board" aria-hidden="true" focusable="false"></svg>
-        <figcaption>Plateau hexagonal, clin d'œil à Yalta, mon jeu d'échecs à trois joueurs. Cliquez sur une case.</figcaption>
-      </figure>
+      <div class="board-wrap" aria-hidden="true">
+        <svg id="board" class="board" role="presentation" focusable="false"></svg>
+      </div>
     </div>
   </header>
 
   <main>
     <section id="projets" class="section">
       <div class="wrap">
-        <h2 class="section-title"><span class="idx">01</span>Projets</h2>
-        <div class="cards">
-          <article class="card card-featured">
-            <header class="card-head">
-              <span class="when">2026</span>
-              <span class="tag">Projet phare</span>
-            </header>
-            <h3>CERISoNet, application web full-stack</h3>
-            <ul class="points">
-              <li>Réseau social avec communication en temps réel par WebSockets : fil d'actualité, likes, commentaires, partages et liste des utilisateurs connectés.</li>
-              <li>Architecture à deux bases de données : PostgreSQL pour les comptes, MongoDB pour les publications et les sessions.</li>
-              <li>Lancement complet en une commande avec Docker Compose.</li>
-            </ul>
-            <ul class="chips" aria-label="Technologies">
-              <li>Angular</li><li>Node.js</li><li>Express.js</li><li>Socket.IO</li><li>MongoDB</li><li>PostgreSQL</li><li>Docker</li>
-            </ul>
-            <p class="more"><a href="https://github.com/IbrahimKakaev/CERISoNet">Voir le code sur GitHub <span aria-hidden="true">→</span></a></p>
-          </article>
-
-          <article class="card">
-            <header class="card-head"><span class="when">2026</span></header>
-            <h3>Bot Telegram de montage vidéo</h3>
-            <ul class="points">
-              <li>Automatisation du montage vidéo : détection de scènes, découpage, synchronisation audio et plusieurs modes de téléchargement.</li>
-              <li>Automatisation de la récupération de données web.</li>
-            </ul>
-            <ul class="chips" aria-label="Technologies">
-              <li>Python</li><li>FFmpeg</li><li>MoviePy</li><li>OpenCV</li><li>librosa</li><li>yt-dlp</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <header class="card-head"><span class="when">2025</span></header>
-            <h3>Yalta, échecs hexagonaux à trois joueurs</h3>
-            <ul class="points">
-              <li>Jeu d'échecs à trois joueurs sur un plateau hexagonal de 96 cases : logique de jeu, rendu graphique et adversaire IA basé sur l'algorithme MinMax.</li>
-              <li>Architecture MVC et annulation des coups.</li>
-            </ul>
-            <ul class="chips" aria-label="Technologies">
-              <li>C++</li><li>SFML</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <header class="card-head"><span class="when">2026</span></header>
-            <h3>Test d'intrusion et sécurité</h3>
-            <ul class="points">
-              <li>Réalisation d'un test d'intrusion complet et rédaction d'un rapport technique d'audit.</li>
-            </ul>
-            <ul class="chips" aria-label="Technologies">
-              <li>Kali Linux</li><li>Nmap</li><li>Wireshark</li><li>Matplotlib</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <header class="card-head"><span class="when">2025</span></header>
-            <h3>Application Jakarta</h3>
-            <ul class="points">
-              <li>Composants EJB avec persistance JPA, déployés sur Payara et connectés à PostgreSQL.</li>
-            </ul>
-            <ul class="chips" aria-label="Technologies">
-              <li>Jakarta</li><li>EJB</li><li>JPA</li><li>Payara</li><li>PostgreSQL</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <header class="card-head"><span class="when">2025</span></header>
-            <h3>Big Data et gestion documentaire</h3>
-            <ul class="points">
-              <li>Traitements distribués MapReduce sous Hadoop dans un environnement Docker.</li>
-              <li>Installation et dépannage d'Alfresco Community Edition, requêtage XML avec XQuery.</li>
-            </ul>
-            <ul class="chips" aria-label="Technologies">
-              <li>Hadoop</li><li>Docker</li><li>Alfresco</li><li>Linux</li><li>XQuery</li>
-            </ul>
-          </article>
-        </div>
+        <h2>Projets</h2>
+        <ol class="rows">
+          <li class="row">
+            <span class="when">2026</span>
+            <div class="what">
+              <h3>CERISoNet, application web full-stack</h3>
+              <p class="stack">Angular, Node.js, Express.js, Socket.IO, MongoDB, PostgreSQL, Docker</p>
+              <ul>
+                <li>Application de réseau social avec communication en temps réel par WebSockets : fil d'actualité, likes, commentaires, partages et liste des utilisateurs connectés.</li>
+                <li>Architecture à deux bases de données : PostgreSQL pour les comptes, MongoDB pour les publications et les sessions.</li>
+                <li>Lancement complet en une commande avec Docker Compose.</li>
+              </ul>
+              <p class="more"><a href="https://github.com/IbrahimKakaev/CERISoNet">Voir le code sur GitHub</a></p>
+            </div>
+          </li>
+          <li class="row">
+            <span class="when">2026</span>
+            <div class="what">
+              <h3>Bot Telegram de montage vidéo</h3>
+              <p class="stack">Python, FFmpeg, MoviePy, OpenCV, librosa, yt-dlp</p>
+              <ul>
+                <li>Automatisation du montage vidéo : détection de scènes, découpage, synchronisation audio et plusieurs modes de téléchargement.</li>
+                <li>Automatisation de la récupération de données web.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="row">
+            <span class="when">2026</span>
+            <div class="what">
+              <h3>Test d'intrusion et sécurité</h3>
+              <p class="stack">Kali Linux, Nmap, Wireshark, Matplotlib</p>
+              <ul>
+                <li>Réalisation d'un test d'intrusion complet et rédaction d'un rapport technique d'audit.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="row">
+            <span class="when">2025</span>
+            <div class="what">
+              <h3>Yalta, échecs hexagonaux à trois joueurs</h3>
+              <p class="stack">C++, SFML</p>
+              <ul>
+                <li>Jeu d'échecs à trois joueurs sur un plateau hexagonal de 96 cases : logique de jeu, rendu graphique et adversaire IA basé sur l'algorithme MinMax.</li>
+                <li>Architecture MVC et annulation des coups.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="row">
+            <span class="when">2025</span>
+            <div class="what">
+              <h3>Application Jakarta</h3>
+              <p class="stack">Jakarta, EJB, JPA, Payara, PostgreSQL</p>
+              <ul>
+                <li>Composants EJB avec persistance JPA, déployés sur Payara et connectés à PostgreSQL.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="row">
+            <span class="when">2025</span>
+            <div class="what">
+              <h3>Big Data et gestion documentaire</h3>
+              <p class="stack">Hadoop, Docker, Alfresco, Linux, XQuery</p>
+              <ul>
+                <li>Traitements distribués MapReduce sous Hadoop dans un environnement Docker.</li>
+                <li>Installation et dépannage d'Alfresco Community Edition, requêtage XML avec XQuery.</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
 
     <section id="experience" class="section">
       <div class="wrap">
-        <h2 class="section-title"><span class="idx">02</span>Expérience</h2>
+        <h2>Expérience</h2>
         <ol class="rows">
           <li class="row">
-            <span class="when">2024 · 2 mois</span>
+            <span class="when">2024</span>
             <div class="what">
-              <h3>Développeur full-stack, stage</h3>
-              <p class="where">DSI Grand Albigeois, Albi</p>
-              <ul class="points">
+              <h3>Développeur full-stack, stage de 2 mois</h3>
+              <p class="stack">DSI Grand Albigeois, Albi. PHP, JavaScript, MySQL</p>
+              <ul>
                 <li>Développement d'une interface web de recherche pour les secrétaires d'accueil de la mairie.</li>
                 <li>Traitement et structuration de données complexes issues de documents scannés, et conception de la base de données.</li>
-              </ul>
-              <ul class="chips" aria-label="Technologies">
-                <li>PHP</li><li>JavaScript</li><li>MySQL</li>
               </ul>
             </div>
           </li>
           <li class="row">
-            <span class="when">2020 – 2025</span>
+            <span class="when">2020 à 2025</span>
             <div class="what">
               <h3>Animateur jeunesse et référent</h3>
-              <p class="where">CROUS, Grand Albigeois, Handiligue</p>
-              <ul class="points">
+              <p class="stack">CROUS, Grand Albigeois, Handiligue</p>
+              <ul>
                 <li>Encadrement de groupes de jeunes et responsabilité d'une équipe sur le terrain.</li>
               </ul>
             </div>
@@ -172,70 +141,73 @@
 
     <section id="competences" class="section">
       <div class="wrap">
-        <h2 class="section-title"><span class="idx">03</span>Compétences</h2>
+        <h2>Compétences</h2>
         <dl class="skills">
-          <div><dt>Langages</dt><dd><ul class="chips"><li>C++</li><li>Python</li><li>Java</li><li>JavaScript</li><li>TypeScript</li><li>PHP</li><li>Rust</li><li>XQuery</li><li>LaTeX</li></ul></dd></div>
-          <div><dt>Web et API</dt><dd><ul class="chips"><li>Angular</li><li>React</li><li>Node.js</li><li>Express.js</li><li>Spring Boot</li><li>Jakarta</li><li>RxJS</li><li>Socket.IO</li><li>API REST</li></ul></dd></div>
-          <div><dt>Données</dt><dd><ul class="chips"><li>PostgreSQL</li><li>MySQL</li><li>MongoDB</li><li>Hadoop</li></ul></dd></div>
-          <div><dt>DevOps et cloud</dt><dd><ul class="chips"><li>Linux</li><li>Git</li><li>GitHub</li><li>Docker</li><li>CI/CD</li><li>Apache</li><li>AWS</li></ul></dd></div>
-          <div><dt>Tests</dt><dd><ul class="chips"><li>JUnit</li><li>Jest</li><li>PyTest</li></ul></dd></div>
-          <div><dt>Méthodes</dt><dd><ul class="chips"><li>UML</li><li>MVC</li><li>ORM</li><li>Scrum</li><li>Jira</li></ul></dd></div>
-          <div><dt>Systèmes</dt><dd><ul class="chips"><li>Multithreading</li><li>Calcul GPU</li><li>Tests d'intrusion</li></ul></dd></div>
+          <dt>Langages</dt>
+          <dd>C++, Python, Java, JavaScript, TypeScript, PHP, Rust, XQuery, LaTeX</dd>
+          <dt>Web et API</dt>
+          <dd>Angular, React, Node.js, Express.js, Spring Boot, Jakarta, RxJS, Socket.IO, API REST</dd>
+          <dt>Données</dt>
+          <dd>PostgreSQL, MySQL, MongoDB, Hadoop</dd>
+          <dt>DevOps et cloud</dt>
+          <dd>Linux, Git, GitHub, Docker, CI/CD, Apache, AWS</dd>
+          <dt>Tests</dt>
+          <dd>JUnit, Jest, PyTest</dd>
+          <dt>Méthodes</dt>
+          <dd>UML, MVC, ORM, Scrum, Jira</dd>
+          <dt>Systèmes</dt>
+          <dd>Multithreading, calcul GPU, tests d'intrusion</dd>
         </dl>
       </div>
     </section>
 
     <section id="formation" class="section">
       <div class="wrap">
-        <h2 class="section-title"><span class="idx">04</span>Formation</h2>
+        <h2>Formation</h2>
         <ol class="rows">
           <li class="row">
-            <span class="when">2024 – aujourd'hui</span>
+            <span class="when">2024 à aujourd'hui</span>
             <div class="what">
               <h3>Master Informatique, Ingénierie logicielle</h3>
-              <p class="where">Avignon Université</p>
+              <p class="stack">Avignon Université</p>
             </div>
           </li>
           <li class="row">
-            <span class="when">2021 – 2024</span>
+            <span class="when">2021 à 2024</span>
             <div class="what">
               <h3>Licence Informatique, option Technologie du Web</h3>
-              <p class="where">INU Champollion, Albi</p>
+              <p class="stack">INU Champollion, Albi</p>
             </div>
           </li>
           <li class="row">
-            <span class="when">2019 – 2021</span>
+            <span class="when">2019 à 2021</span>
             <div class="what">
               <h3>Baccalauréat, spécialités Informatique et Anglais</h3>
-              <p class="where">Lycée Lapérouse, Albi</p>
+              <p class="stack">Lycée Lapérouse, Albi</p>
             </div>
           </li>
         </ol>
-        <div class="extras">
-          <p><span class="label">Langues</span>Français (langue maternelle), russe (courant), anglais (B1)</p>
-          <p><span class="label">Intérêts</span>Automatisation, musculation, randonnée, musique</p>
-        </div>
+        <p class="aside">Langues : français (langue maternelle), russe (courant), anglais (B1). Centres d'intérêt : automatisation, musculation, randonnée, musique.</p>
       </div>
     </section>
 
-    <section id="contact" class="section contact">
+    <section id="contact" class="section">
       <div class="wrap">
-        <h2 class="section-title"><span class="idx">05</span>Contact</h2>
+        <h2>Contact</h2>
         <p class="contact-lead">Un stage, une question sur un projet ? Écrivez-moi, je réponds vite.</p>
-        <p class="contact-mail"><a href="mailto:ibrahim.kakaev@gmail.com">ibrahim.kakaev@gmail.com</a></p>
-        <ul class="contact-links">
+        <ul class="contact-list">
+          <li><a href="mailto:ibrahim.kakaev@gmail.com">ibrahim.kakaev@gmail.com</a></li>
+          <li><a href="https://github.com/IbrahimKakaev">github.com/IbrahimKakaev</a></li>
           <li><a href="https://www.linkedin.com/in/ibrahim-kakaev-7b11282a0">LinkedIn</a></li>
-          <li><a href="https://github.com/IbrahimKakaev">GitHub</a></li>
-          <li><a href="cv-ibrahim-kakaev.pdf" download="CV-Ibrahim-Kakaev.pdf">CV (PDF)</a></li>
+          <li><a href="cv-ibrahim-kakaev.pdf">Télécharger mon CV (PDF)</a></li>
         </ul>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="wrap footer-inner">
-      <p>Ibrahim Kakaev · Albi et Toulouse · Nationalité française · Permis B</p>
-      <p class="mono">Fait main, HTML, CSS et JavaScript, sans framework.</p>
+    <div class="wrap">
+      <p>Ibrahim Kakaev, Albi et Toulouse. Nationalité française, permis B.</p>
     </div>
   </footer>
 
