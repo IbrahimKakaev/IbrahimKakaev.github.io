@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rapports de cybersécurité — Ibrahim Kakaev</title>
+  <meta name="description" content="Rapports de pentest et de CTF réalisés par Ibrahim Kakaev sur VulnHub, TryHackMe et Root-Me, dans le cadre de sa formation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Literata:ital,opsz,wght@0,7..72,400..600;1,7..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero reports-hero">
+    <div class="wrap">
+      <p class="back"><a href="index.html">← Retour au portfolio</a></p>
+      <h1 class="name reports-name">Rapports de cybersécurité</h1>
+      <p class="pitch">Treize rapports de pentest et de CTF rédigés dans le cadre de ma formation, sur des plateformes d'entraînement légales. Chaque rapport suit une méthodologie complète : reconnaissance, énumération, exploitation, élévation de privilèges, puis recommandations de remédiation.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="wrap">
+
+        <div class="reports-group">
+          <h2 class="reports-title">VulnHub <span class="reports-count">5 machines compromises</span></h2>
+          <ul class="reports">
+            <li>
+              <div class="report-head">
+                <span class="report-name">VulnCMS:1</span>
+                <span class="report-actions">
+                  <a href="reports/vulnhub/vulncms-1.pdf" target="_blank" rel="noopener">Visualiser</a>
+                  <a href="reports/vulnhub/vulncms-1.pdf" download>Télécharger</a>
+                </span>
+              </div>
+              <p class="report-desc">Injection SQL sur Joomla 3.4.3 (CVE-2015-7297), extraction de credentials, pivot entre utilisateurs et élévation de privilèges jusqu'à root.</p>
+            </li>
+            <li>
+              <div class="report-head">
+                <span class="report-name">RickdiculouslyEasy</span>
+                <span class="report-actions">
+                  <a href="reports/vulnhub/rickdiculouslyeasy.pdf" target="_blank" rel="noopener">Visualiser</a>
+                  <a href="reports/vulnhub/rickdiculouslyeasy.pdf" download>Télécharger</a>
+                </span>
+              </div>
+              <p class="report-desc">CTF résolu intégralement, 8 flags sur 8 : énumération de services, FTP anonyme, stéganographie et shells distants.</p>
+            </li>
+            <li>
+              <div class="report-head">
+                <span class="report-name">Basic Pentesting 1</span>
+                <span class="report-actions">
+                  <a href="reports/vulnhub/basic-pentesting-1.pdf" target="_blank" rel="noopener">Visualiser</a>
+                  <a href="reports/vulnhub/basic-pentesting-1.pdf" download>Télécharger</a>
+                </span>
+              </div>
+              <p class="report-desc">Compromission d'un site WordPress puis élévation de privilèges système par une mauvaise configuration de permissions.</p>
+            </li>
+            <li>
+              <div class="report-head">
+                <span class="report-name">Funbox CTF</span>
+                <span class="report-actions">
+                  <a href="reports/vulnhub/funbox-ctf.pdf" target="_blank" rel="noopener">Visualiser</a>
+                  <a href="reports/vulnhub/funbox-ctf.pdf" download>Télécharger</a>
+                </span>
+              </div>
+              <p class="report-desc">Énumération web, exploitation d'un upload de fichier non sécurisé et élévation de privilèges via une vulnérabilité kernel (CVE-2017-16995).</p>
+            </li>
+            <li>
+              <div class="report-head">
+                <span class="report-name">PentesterLab — From SQL Injection to Shell</span>
+                <span class="report-actions">
+                  <a href="reports/vulnhub/pentesterlab-sql-injection-to-shell.pdf" target="_blank" rel="noopener">Visualiser</a>
+                  <a href="reports/vulnhub/pentesterlab-sql-injection-to-shell.pdf" download>Télécharger</a>
+                </span>
+              </div>
+              <p class="report-desc">Chaîne complète d'une injection SQL jusqu'à l'accès système, avec analyse des remédiations (requêtes préparées, hachage moderne).</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="reports-group">
+          <h2 class="reports-title">TryHackMe <span class="reports-count">7 modules complétés</span></h2>
+          <ul class="reports">
+            <li>
+              <div class="report-head">
+                <span class="report-name">Further Nmap</span>
+                <span class="report-actions">
+                  <a href="reports/tryhackme/nmap.pdf" target="_blank" rel="noopener">Visualiser</a>
+                  <a href="reports/tryhackme/nmap.pdf" download>Télécharger</a>
+                </span>
+              </div>
+              <p class="report-desc">Types de scans, scripts NSE et techniques d'évasion de pare-feu.</p>
+            </li>
+            <li>
+              <div class="report-head">
+                <span class="report-name">Introduction to DevSecOps</span>
+                <span class="report-actions">
+                  <a href="reports/tryhackme/introduction-to-devsecops.pdf" target="_blank" rel="noopener">Visualiser</a>
+                  <a href="reports/tryhackme/introduction-to-devsecops.pdf" download>Télécharger</a>
+                </span>
+              </div>
+              <p class="report-desc">Intégration de la sécurité dans le cycle DevOps et les pipelines CI/CD.</p>
+            </li>
+            <li>
+              <div class="report-head">
+                <span class="report-name">Burp Suite</span>
+                <span class="report-actions">
+                  <a href="reports/tryhackme/burp-suite.pdf" target="_blank" rel="noopener">Visualiser</a>
+                  <a href="reports/tryhackme/burp-suite.pdf" download>Télécharger</a>
+                </span>
+              </div>
+              <p class="report-desc">Interception, analyse et manipulation du trafic des applications web.</p>
+            </li>
+            <li>
+              <div class="report-head">
+                <span class="report-name">Metasploit</span>
+                <span class="report-actions">
+                  <a href="reports/tryhackme/metasploit.pdf" target="_blank" rel="noopener">Visualiser</a>
+                  <a href="reports/tryhackme/metasploit.pdf" download>Télécharger</a>
+                </span>
+              </div>
+              <p class="report-desc">Prise en main du framework d'exploitation : modules, payloads et post-exploitation.</p>
+            </li>
+            <li>
+              <div class="report-head">
+                <span class="report-name">Python Basics</span>
+                <span class="report-actions">
+                  <a href="reports/tryhackme/python-basics.pdf" target="_blank" rel="noopener">Visualiser</a>
+                  <a href="reports/tryhackme/python-basics.pdf" download>Télécharger</a>
+                </span>
+              </div>
+              <p class="report-desc">Bases de la programmation Python appliquées à l'écriture d'outils de sécurité.</p>
+            </li>
+            <li>
+              <div class="report-head">
+                <span class="report-name">SDLC</span>
+                <span class="report-actions">
+                  <a href="reports/tryhackme/sdlc.pdf" target="_blank" rel="noopener">Visualiser</a>
+                  <a href="reports/tryhackme/sdlc.pdf" download>Télécharger</a>
+                </span>
+              </div>
+              <p class="report-desc">Cycle de développement logiciel et intégration de la sécurité à chaque étape.</p>
+            </li>
+            <li>
+              <div class="report-head">
+                <span class="report-name">SQLMap</span>
+                <span class="report-actions">
+                  <a href="reports/tryhackme/sqlmap.pdf" target="_blank" rel="noopener">Visualiser</a>
+                  <a href="reports/tryhackme/sqlmap.pdf" download>Télécharger</a>
+                </span>
+              </div>
+              <p class="report-desc">Automatisation de la détection et de l'exploitation des injections SQL.</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="reports-group">
+          <h2 class="reports-title">Root-Me <span class="reports-count">10 challenges, 5 catégories</span></h2>
+          <ul class="reports">
+            <li>
+              <div class="report-head">
+                <span class="report-name">Challenges Root-Me</span>
+                <span class="report-actions">
+                  <a href="reports/root-me/root-me.pdf" target="_blank" rel="noopener">Visualiser</a>
+                  <a href="reports/root-me/root-me.pdf" download>Télécharger</a>
+                </span>
+              </div>
+              <p class="report-desc">Dix challenges résolus en App-Script, App-Système, Cracking, Programmation et Réaliste (PATH hijacking, buffer overflow, programmation réseau TCP, OCR). <a href="https://www.root-me.org/MIK_Sparrow?lang=fr" target="_blank" rel="noopener">Profil public</a>.</p>
+            </li>
+          </ul>
+        </div>
+
+        <p class="more"><a href="index.html">← Retour au portfolio</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>Ibrahim Kakaev, Albi et Toulouse. Nationalité française, permis B.</p>
+    </div>
+  </footer>
+</body>
+</html>

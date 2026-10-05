@@ -311,8 +311,10 @@ h3 {
   font-size: 1.1rem;
 }
 
-.report-link {
+.report-actions {
   flex: none;
+  display: flex;
+  gap: 18px;
   font-family: var(--display);
   font-weight: 700;
   font-size: 0.92rem;
@@ -323,6 +325,25 @@ h3 {
   margin: 6px 0 0;
   max-width: 46rem;
   color: var(--ink-soft);
+}
+
+/* Page des rapports */
+
+.reports-hero {
+  padding: clamp(32px, 6vw, 72px) 0 clamp(28px, 5vw, 56px);
+}
+
+.reports-name {
+  margin: 10px 0 18px;
+  font-size: clamp(1.9rem, 5.6vw, 3.6rem);
+  overflow-wrap: anywhere;
+  line-height: 1;
+}
+
+.back {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 700;
 }
 
 /* Compétences */
