@@ -82,6 +82,39 @@
       <div class="wrap">
         <h2>Projects</h2>
         <ol class="rows">
+          <li class="row" data-node="CERISoNet">
+            <span class="when">2026</span>
+            <div class="what">
+              <h3>CERISoNet, full-stack web application</h3>
+              <p class="stack">Angular, Node.js, Express.js, Socket.IO, MongoDB, PostgreSQL, Docker</p>
+              <ul>
+                <li>Social network application with real-time communication over WebSockets: news feed, likes, comments, shares and a list of connected users.</li>
+                <li>Two-database architecture: PostgreSQL for accounts, MongoDB for posts and sessions.</li>
+                <li>Full launch with a single command using Docker Compose.</li>
+                <li>269 tests (API, security, real time), CodeQL and Lighthouse in CI.</li>
+              </ul>
+              <p class="more">
+                <a href="https://ibrahimkakaev.github.io/CERISoNet/">Demo</a>
+                <a href="https://github.com/IbrahimKakaev/CERISoNet">Code</a>
+              </p>
+            </div>
+          </li>
+          <li class="row" data-node="Sésame">
+            <span class="when">2026</span>
+            <div class="what">
+              <h3>Sésame, AI-powered enterprise document search</h3>
+              <p class="stack">Java 21, Spring Boot, Spring Security, PostgreSQL/pgvector, Angular, Docker</p>
+              <ul>
+                <li>An LLM answers questions about PDFs and cites its sources, without ever receiving a passage the user is not allowed to see: filtering by groups in the SQL query, before any call to the model.</li>
+                <li>Isolation tests for every user-document pair on every route, leak tests on the request sent to the LLM, immediate revocation of access rights; documented threat model.</li>
+                <li>JWT with rotation and replay detection, audit log; 24 out of 24 sources retrieved in the evaluation; CI with CodeQL and Trivy.</li>
+              </ul>
+              <p class="more">
+                <a href="https://ibrahimkakaev.github.io/Sesame/">Demo</a>
+                <a href="https://github.com/IbrahimKakaev/Sesame">Code</a>
+              </p>
+            </div>
+          </li>
           <li class="row" data-node="NetWatch IDS">
             <span class="when">2026</span>
             <div class="what">
@@ -109,39 +142,6 @@
               <p class="more">
                 <a href="reports.html">View the reports</a>
                 <a href="https://www.root-me.org/MIK_Sparrow?lang=fr">Root-Me</a>
-              </p>
-            </div>
-          </li>
-          <li class="row" data-node="Sésame">
-            <span class="when">2026</span>
-            <div class="what">
-              <h3>Sésame, AI-powered enterprise document search</h3>
-              <p class="stack">Java 21, Spring Boot, Spring Security, PostgreSQL/pgvector, Angular, Docker</p>
-              <ul>
-                <li>An LLM answers questions about PDFs and cites its sources, without ever receiving a passage the user is not allowed to see: filtering by groups in the SQL query, before any call to the model.</li>
-                <li>Isolation tests for every user-document pair on every route, leak tests on the request sent to the LLM, immediate revocation of access rights; documented threat model.</li>
-                <li>JWT with rotation and replay detection, audit log; 24 out of 24 sources retrieved in the evaluation; CI with CodeQL and Trivy.</li>
-              </ul>
-              <p class="more">
-                <a href="https://ibrahimkakaev.github.io/Sesame/">Demo</a>
-                <a href="https://github.com/IbrahimKakaev/Sesame">Code</a>
-              </p>
-            </div>
-          </li>
-          <li class="row" data-node="CERISoNet">
-            <span class="when">2026</span>
-            <div class="what">
-              <h3>CERISoNet, full-stack web application</h3>
-              <p class="stack">Angular, Node.js, Express.js, Socket.IO, MongoDB, PostgreSQL, Docker</p>
-              <ul>
-                <li>Social network application with real-time communication over WebSockets: news feed, likes, comments, shares and a list of connected users.</li>
-                <li>Two-database architecture: PostgreSQL for accounts, MongoDB for posts and sessions.</li>
-                <li>Full launch with a single command using Docker Compose.</li>
-                <li>269 tests (API, security, real time), CodeQL and Lighthouse in CI.</li>
-              </ul>
-              <p class="more">
-                <a href="https://ibrahimkakaev.github.io/CERISoNet/">Demo</a>
-                <a href="https://github.com/IbrahimKakaev/CERISoNet">Code</a>
               </p>
             </div>
           </li>
