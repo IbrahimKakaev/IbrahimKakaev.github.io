@@ -43,7 +43,7 @@
   --rule: #223238;
   --accent: #ff5a3c;
   --on-accent: #0a1216;
-  --edge: #2a4a54;
+  --edge: #3a6470;
   --node: #5fb0b0;
 
   --display: "Syne", "Helvetica Neue", Arial, sans-serif;
@@ -64,7 +64,7 @@
   --rule: #bccbca;
   --accent: #b02d1b;
   --on-accent: #ffffff;
-  --edge: #a3c2c1;
+  --edge: #8fb1b0;
   --node: #3d6f78;
 }
 
@@ -318,8 +318,9 @@ button:focus-visible {
 
 .net-caption {
   margin: 8px 0 0;
+  min-height: 3em;
   font-family: var(--mono);
-  font-size: 0.76rem;
+  font-size: 0.86rem;
   line-height: 1.5;
   color: var(--muted);
 }

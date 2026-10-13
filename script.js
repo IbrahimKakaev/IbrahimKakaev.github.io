@@ -23,8 +23,9 @@
 
 /* Carte du réseau du hero.
    Le graphe est lu dans la page : chaque ligne [data-node] est un projet (ou le stage),
-   ses technologies viennent de sa ligne .stack (ou de data-tech). Deux projets sont donc
-   reliés seulement s'ils partagent réellement une technologie. */
+   ses technologies viennent de sa ligne .stack (ou de data-tech). Pour rester lisible,
+   seules les technologies partagées par plusieurs projets deviennent des nœuds ; la liste
+   complète d'un projet s'affiche dans la légende au survol. */
 (function () {
   var canvas = document.getElementById("net");
   if (!canvas || !canvas.getContext) return;
@@ -53,75 +54,74 @@
     var hub = node("hub:" + row.dataset.node, row.dataset.node, "hub", row);
     var stack = row.querySelector(".stack");
     var source = row.dataset.tech || (stack ? stack.textContent : "");
+    hub.info = source.replace(/\s+/g, " ").trim();
     link(me, hub);
     source.split(/\s*[,\/]\s*/).forEach(function (name) {
       name = name.trim();
       if (name) link(hub, node("tech:" + name.toLowerCase(), name, "tech", null));
     });
   });
+  nodes = nodes.filter(function (n) { return n.type !== "tech" || n.links.length > 1; });
+  links = links.filter(function (l) { return nodes.indexOf(l.a) >= 0 && nodes.indexOf(l.b) >= 0; });
+  nodes.forEach(function (n) {
+    n.links = n.links.filter(function (l) { return links.indexOf(l) >= 0; });
+  });
   if (nodes.length < 3) return;
 
-  /* Placement par forces (Fruchterman-Reingold), calculé une fois, avec un hasard à graine
-     fixe : la carte est identique à chaque visite. */
+  var caption = canvas.parentNode.querySelector(".net-caption");
+  var captionText = caption ? caption.textContent : "";
+
+  /* Placement : moi au centre, les projets répartis régulièrement sur une ellipse (dans l'ordre
+     de la page), chaque technologie partagée attirée entre ses projets puis écartée des autres
+     nœuds pour que les étiquettes ne se chevauchent pas. Calculé une fois, sans hasard. */
+  (function layout() {
+    var hubs = nodes.filter(function (n) { return n.type === "hub"; });
+    var techs = nodes.filter(function (n) { return n.type === "tech"; });
+
+    me.x = 0; me.y = 0;
+    hubs.forEach(function (n, i) {
+      var ang = (i / hubs.length) * Math.PI * 2;
+      n.x = Math.sin(ang);
+      n.y = -Math.cos(ang);
+    });
+    techs.forEach(function (n) {
+      n.cx = 0; n.cy = 0;
+      n.links.forEach(function (l) {
+        var hub = l.a === n ? l.b : l.a;
+        n.cx += hub.x / n.links.length;
+        n.cy += hub.y / n.links.length;
+      });
+      n.x = n.cx * 0.8; n.y = n.cy * 0.8;
+    });
+    for (var it = 0; it < 400; it++) {
+      techs.forEach(function (n) {
+        var fx = (n.cx - n.x) * 0.05, fy = (n.cy - n.y) * 0.05;
+        nodes.forEach(function (o) {
+          if (o === n) return;
+          var dx = n.x - o.x, dy = n.y - o.y;
+          var d2 = dx * dx + dy * dy + 0.0001;
+          fx += (dx / d2) * 0.006;
+          fy += (dy / d2) * 0.006;
+        });
+        var r = Math.sqrt(fx * fx + fy * fy) || 0.001;
+        var stepLen = Math.min(r, 0.03) / r;
+        n.x += fx * stepLen;
+        n.y += fy * stepLen;
+        var out = Math.sqrt(n.x * n.x + n.y * n.y);
+        if (out > 0.78) { n.x *= 0.78 / out; n.y *= 0.78 / out; }   // reste à l'intérieur de l'ellipse
+      });
+    }
+    nodes.forEach(function (n, i) {
+      n.phase = i * 1.7;
+      n.freq = 0.6 + (i % 4) * 0.18;
+    });
+  })();
+
   var seed = 11;
   function rnd() {
     seed = (seed * 1664525 + 1013904223) >>> 0;
     return seed / 4294967296;
   }
-
-  (function layout() {
-    var k = Math.sqrt(4 / nodes.length);
-    var i, j, a, b, dx, dy, d, f;
-    nodes.forEach(function (n) {
-      var ang = rnd() * Math.PI * 2;
-      var r = n.type === "me" ? 0 : n.type === "hub" ? 0.45 : 0.9;
-      n.x = Math.cos(ang) * r;
-      n.y = Math.sin(ang) * r;
-    });
-    for (var it = 0; it < 500; it++) {
-      var temp = 0.12 * (1 - it / 500) + 0.002;
-      for (i = 0; i < nodes.length; i++) { nodes[i].dx = 0; nodes[i].dy = 0; }
-      for (i = 0; i < nodes.length; i++) {
-        a = nodes[i];
-        for (j = i + 1; j < nodes.length; j++) {
-          b = nodes[j];
-          dx = a.x - b.x; dy = a.y - b.y;
-          d = Math.sqrt(dx * dx + dy * dy) || 0.001;
-          f = (k * k) / d / d;
-          a.dx += dx * f; a.dy += dy * f;
-          b.dx -= dx * f; b.dy -= dy * f;
-        }
-        a.dx -= a.x * 0.35 * k;
-        a.dy -= a.y * 0.35 * k;
-      }
-      for (i = 0; i < links.length; i++) {
-        a = links[i].a; b = links[i].b;
-        dx = a.x - b.x; dy = a.y - b.y;
-        d = Math.sqrt(dx * dx + dy * dy) || 0.001;
-        f = (d / k) * (a === me || b === me ? 0.35 : 1.1);   // liens courts vers les technologies, longs vers le centre
-        a.dx -= dx * f; a.dy -= dy * f;
-        b.dx += dx * f; b.dy += dy * f;
-      }
-      for (i = 0; i < nodes.length; i++) {
-        a = nodes[i];
-        d = Math.sqrt(a.dx * a.dx + a.dy * a.dy) || 0.001;
-        f = Math.min(d, temp) / d;
-        a.x += a.dx * f;
-        a.y += a.dy * f;
-      }
-    }
-    var minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-    nodes.forEach(function (n) {
-      minX = Math.min(minX, n.x); maxX = Math.max(maxX, n.x);
-      minY = Math.min(minY, n.y); maxY = Math.max(maxY, n.y);
-    });
-    nodes.forEach(function (n) {
-      n.x = ((n.x - minX) / (maxX - minX)) * 2 - 1;
-      n.y = ((n.y - minY) / (maxY - minY)) * 2 - 1;
-      n.phase = rnd() * Math.PI * 2;
-      n.freq = 0.5 + rnd() * 0.7;
-    });
-  })();
 
   var W = 0, H = 0, dpr = 1;
   var colors = {};
@@ -147,8 +147,8 @@
   }
 
   function place(time) {
-    var padX = W < 520 ? 40 : 64;
-    var padY = 34;
+    var padX = W < 520 ? 48 : 80;
+    var padY = 46;
     var scroll = Math.max(-40, -window.scrollY * 0.06);
     for (var i = 0; i < nodes.length; i++) {
       var n = nodes[i];
@@ -168,18 +168,19 @@
 
   function label(n, lit) {
     var hub = n.type !== "tech";
-    ctx.font = hub ? (n.type === "me" ? "800 13px Syne, sans-serif" : (W < 520 ? "700 11px Syne, sans-serif" : "700 13px Syne, sans-serif"))
-                   : '500 11px "IBM Plex Mono", monospace';
+    var small = W < 520;
+    ctx.font = hub ? (small ? "700 13px Syne, sans-serif" : "700 16px Syne, sans-serif")
+                   : (small ? '500 12px "IBM Plex Mono", monospace' : '500 14px "IBM Plex Mono", monospace');
     var tw = ctx.measureText(n.label).width;
     var x = Math.min(Math.max(n.px, tw / 2 + 3), W - tw / 2 - 3);
-    var y = hub ? n.py - 13 : n.py + 16;
+    var y = hub ? n.py - (n.type === "me" ? 24 : 21) : n.py + 21;
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.lineJoin = "round";
-    ctx.lineWidth = 4;
+    ctx.lineWidth = 5;
     ctx.strokeStyle = colors.bg;
     ctx.strokeText(n.label, x, y);
-    ctx.fillStyle = hub ? colors.text : (lit && active ? colors.text : colors.muted);
+    ctx.fillStyle = hub ? colors.text : colors.node;
     ctx.fillText(n.label, x, y);
   }
 
@@ -189,7 +190,7 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);
 
-    ctx.lineWidth = 1;
+    ctx.lineWidth = 1.5;
     for (i = 0; i < links.length; i++) {
       l = links[i];
       lit = active && (l.a === active || l.b === active);
@@ -211,13 +212,14 @@
       var x = from.px + (to.px - from.px) * p.t;
       var y = from.py + (to.py - from.py) * p.t;
       var tail = Math.max(0, p.t - 0.12);
-      ctx.globalAlpha = 0.45;
+      ctx.globalAlpha = 0.5;
+      ctx.lineWidth = 2;
       ctx.beginPath();
       ctx.moveTo(from.px + (to.px - from.px) * tail, from.py + (to.py - from.py) * tail);
       ctx.lineTo(x, y);
       ctx.stroke();
       ctx.globalAlpha = 1;
-      ctx.fillRect(x - 2, y - 2, 4, 4);
+      ctx.fillRect(x - 3.5, y - 3.5, 7, 7);
     }
 
     for (i = 0; i < nodes.length; i++) {
@@ -227,10 +229,10 @@
       if (n.type === "tech") {
         ctx.fillStyle = n === active ? colors.accent : colors.node;
         ctx.beginPath();
-        ctx.arc(n.px, n.py, n.links.length > 1 ? 4 : 2.6, 0, Math.PI * 2);
+        ctx.arc(n.px, n.py, 7, 0, Math.PI * 2);
         ctx.fill();
       } else {
-        var s = n.type === "me" ? 7 : 5;
+        var s = n.type === "me" ? 11 : 8;
         if (n.hit > 0.02) {
           ctx.globalAlpha = n.hit * (lit ? 1 : 0.3);
           ctx.strokeStyle = colors.accent;
@@ -241,20 +243,18 @@
         ctx.fillStyle = n.type === "me" || n === active ? colors.accent : colors.bg;
         ctx.fillRect(n.px - s, n.py - s, 2 * s, 2 * s);
         ctx.strokeStyle = n.type === "me" || n === active ? colors.accent : colors.text;
-        ctx.lineWidth = 1.5;
+        ctx.lineWidth = 2;
         ctx.strokeRect(n.px - s, n.py - s, 2 * s, 2 * s);
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 1.5;
       }
     }
 
-    /* Étiquettes : projets toujours ; technologies partagées sur grand canvas ; les autres au survol. */
+    /* Tous les nœuds sont étiquetés. */
     for (var pass = 0; pass < 2; pass++) {   // les noms de projets passent au-dessus des technologies
       for (i = 0; i < nodes.length; i++) {
         n = nodes[i];
         if ((n.type === "tech") !== (pass === 0)) continue;
         lit = isLit(n);
-        var show = n.type === "hub" || (active ? lit : W >= 520 && (n.type === "me" || n.links.length > 1));
-        if (!show) continue;
         ctx.globalAlpha = lit ? 1 : 0.3;
         label(n, lit);
       }
@@ -263,7 +263,7 @@
   }
 
   function step(dt) {
-    var max = W < 520 ? 12 : 26;
+    var max = W < 520 ? 6 : 10;
     if (packets.length < max && rnd() < dt * 0.006) {
       var pool = active && rnd() < 0.75 ? active.links : links;
       var l = pool[Math.floor(rnd() * pool.length)];
@@ -314,7 +314,7 @@
   function pick() {
     active = null;
     if (!pointer) return;
-    var best = 30 * 30;
+    var best = 44 * 44;
     for (var i = 0; i < nodes.length; i++) {
       var dx = nodes[i].px - pointer.x, dy = nodes[i].py - pointer.y;
       var d = dx * dx + dy * dy;
@@ -322,10 +322,18 @@
     }
   }
 
+  /* La légende sous la carte donne les technologies du projet survolé. */
+  function showInfo() {
+    if (!caption) return;
+    var text = active && active.info ? active.label + " : " + active.info : captionText;
+    if (caption.textContent !== text) caption.textContent = text;
+  }
+
   function onPointer(e) {
     var rect = canvas.getBoundingClientRect();
     pointer = { x: e.clientX - rect.left, y: e.clientY - rect.top };
     pick();
+    showInfo();
     canvas.style.cursor = active && active.row ? "pointer" : "";
     if (!frame) draw(reduce.matches ? 0 : clock);
   }
@@ -335,6 +343,7 @@
   canvas.addEventListener("pointerleave", function () {
     pointer = null;
     active = null;
+    showInfo();
     canvas.style.cursor = "";
     if (!frame) draw(reduce.matches ? 0 : clock);
   });
