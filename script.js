@@ -76,48 +76,36 @@
   var caption = canvas.parentNode.querySelector(".net-caption");
   var captionText = caption ? caption.textContent : "";
 
-  /* Placement : moi au centre, les projets répartis régulièrement sur une ellipse (dans l'ordre
-     de la page), chaque technologie partagée attirée entre ses projets puis écartée des autres
-     nœuds pour que les étiquettes ne se chevauchent pas. Calculé une fois, sans hasard. */
+  /* Placement en trois colonnes, comme un schéma de réseau : moi à gauche, les projets au
+     milieu (dans l'ordre de la page), les technologies à droite. Chaque technologie est
+     rangée à la hauteur moyenne de ses projets, ce qui limite les croisements de liens.
+     Calculé une fois, sans hasard. */
   (function layout() {
     var hubs = nodes.filter(function (n) { return n.type === "hub"; });
     var techs = nodes.filter(function (n) { return n.type === "tech"; });
 
-    me.x = 0; me.y = 0;
-    hubs.forEach(function (n, i) {
-      var ang = (i / hubs.length) * Math.PI * 2;
-      n.x = Math.sin(ang);
-      n.y = -Math.cos(ang);
-    });
-    techs.forEach(function (n) {
-      n.cx = 0; n.cy = 0;
-      n.links.forEach(function (l) {
-        var hub = l.a === n ? l.b : l.a;
-        n.cx += hub.x / n.links.length;
-        n.cy += hub.y / n.links.length;
-      });
-      n.cx *= 0.6; n.cy *= 0.6;   // tirées vers l'intérieur, à l'écart des noms de projets
-      n.x = n.cx; n.y = n.cy;
-    });
-    for (var it = 0; it < 400; it++) {
-      techs.forEach(function (n) {
-        var fx = (n.cx - n.x) * 0.05, fy = (n.cy - n.y) * 0.05;
-        nodes.forEach(function (o) {
-          if (o === n) return;
-          var dx = n.x - o.x, dy = n.y - o.y;
-          var d2 = dx * dx + dy * dy + 0.0001;
-          var push = o.type === "tech" ? 0.03 : 0.014;   // les technologies s'écartent surtout entre elles
-          fx += (dx / d2) * push;
-          fy += (dy / d2) * push;
-        });
-        var r = Math.sqrt(fx * fx + fy * fy) || 0.001;
-        var stepLen = Math.min(r, 0.03) / r;
-        n.x += fx * stepLen;
-        n.y += fy * stepLen;
-        var out = Math.sqrt(n.x * n.x + n.y * n.y);
-        if (out > 0.78) { n.x *= 0.78 / out; n.y *= 0.78 / out; }   // reste à l'intérieur de l'ellipse
+    function spread(list, x) {
+      list.forEach(function (n, i) {
+        n.x = x;
+        n.y = list.length > 1 ? (i / (list.length - 1)) * 2 - 1 : 0;
       });
     }
+
+    me.x = -1; me.y = 0;
+    spread(hubs, -0.08);
+    techs.forEach(function (n, i) {
+      n.rank = i;
+      n.mean = 0;
+      n.low = -1;
+      n.links.forEach(function (l) {
+        var y = (l.a === n ? l.b : l.a).y;
+        n.mean += y / n.links.length;
+        n.low = Math.max(n.low, y);
+      });
+    });
+    techs.sort(function (a, b) { return a.mean - b.mean || a.low - b.low || a.rank - b.rank; });
+    spread(techs, 1);
+
     nodes.forEach(function (n, i) {
       n.phase = i * 1.7;
       n.freq = 0.6 + (i % 4) * 0.18;
@@ -154,13 +142,13 @@
   }
 
   function place(time) {
-    var padX = W < 520 ? 48 : 80;
-    var padY = 46;
+    var padX = W < 520 ? 44 : 72;
+    var padY = 52;
     var scroll = Math.max(-40, -window.scrollY * 0.06);
     for (var i = 0; i < nodes.length; i++) {
       var n = nodes[i];
-      n.px = padX + ((n.x + 1) / 2) * (W - 2 * padX) + shiftX + Math.sin(time * 0.0007 * n.freq + n.phase) * 4;
-      n.py = padY + ((n.y + 1) / 2) * (H - 2 * padY) + shiftY + scroll + Math.cos(time * 0.0006 * n.freq + n.phase) * 4;
+      n.px = padX + ((n.x + 1) / 2) * (W - 2 * padX) + shiftX + Math.sin(time * 0.0007 * n.freq + n.phase) * 2;
+      n.py = padY + ((n.y + 1) / 2) * (H - 2 * padY) + shiftY + scroll + Math.cos(time * 0.0006 * n.freq + n.phase) * 2;
     }
   }
 
@@ -261,6 +249,7 @@
       for (i = 0; i < nodes.length; i++) {
         n = nodes[i];
         if ((n.type === "tech") !== (pass === 0)) continue;
+        if (n.type === "me" && W < 520) continue;   // sur petit écran, le nom est déjà le titre de la page
         lit = isLit(n);
         ctx.globalAlpha = lit ? 1 : 0.3;
         label(n, lit);
