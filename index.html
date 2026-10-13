@@ -17,8 +17,8 @@
     <div class="wrap hero-grid">
       <div class="hero-text">
         <h1 class="name">Ibrahim<br>Kakaev</h1>
-        <p class="role">Développeur full-stack, en Master 2 Ingénierie logicielle à Avignon Université.</p>
-        <p class="pitch">Passionné par le web moderne et les architectures robustes, je veux m'investir dans des projets techniques exigeants.</p>
+        <p class="role">Développeur full-stack Java / Spring Boot · Angular</p>
+        <p class="pitch">Je construis des applications complètes, de l'API Spring Boot ou Rust à l'interface Angular, livrées testées : intégration continue, analyse de sécurité et démo en ligne. Intérêt marqué pour la sécurité applicative.</p>
         <p class="availability">
           <span class="dot" aria-hidden="true"></span>
           Je cherche un stage de fin d'études de 6 mois à Toulouse ou à Albi, à partir de janvier 2027. Disponible immédiatement, début anticipé possible.
@@ -27,6 +27,8 @@
           <a href="#contact">Me contacter</a>
           <a href="cv-ibrahim-kakaev.pdf">Télécharger mon CV</a>
           <a href="https://github.com/IbrahimKakaev">GitHub</a>
+          <a href="https://www.linkedin.com/in/ibrahim-kakaev-7b11282a0">LinkedIn</a>
+          <a href="https://www.root-me.org/MIK_Sparrow?lang=fr">Root-Me</a>
         </p>
       </div>
       <div class="board-wrap" aria-hidden="true">
@@ -43,25 +45,49 @@
           <li class="row">
             <span class="when">2026</span>
             <div class="what">
+              <h3>Sésame, recherche documentaire d'entreprise par IA</h3>
+              <p class="stack">Java 21, Spring Boot, Spring Security, PostgreSQL/pgvector, Angular, Docker</p>
+              <ul>
+                <li>Un LLM répond sur des PDF en citant ses sources, sans jamais recevoir un passage interdit à l'utilisateur : filtrage par groupes dans la requête SQL, avant tout appel au modèle.</li>
+                <li>Tests d'étanchéité de chaque couple utilisateur-document sur chaque route, tests de fuite sur la requête envoyée au LLM, révocation immédiate des droits ; modèle de menace documenté.</li>
+                <li>JWT avec rotation et détection de rejeu, journal d'audit ; 24 sources sur 24 retrouvées à l'évaluation ; CI avec CodeQL et Trivy.</li>
+              </ul>
+              <p class="more">
+                <a href="https://ibrahimkakaev.github.io/Sesame/">Démo</a>
+                <a href="https://github.com/IbrahimKakaev/Sesame">Code</a>
+              </p>
+            </div>
+          </li>
+          <li class="row">
+            <span class="when">2026</span>
+            <div class="what">
+              <h3>NetWatch IDS, détection d'intrusion réseau en temps réel</h3>
+              <p class="stack">Rust, Tokio, axum, Angular, SQLite</p>
+              <ul>
+                <li>Moteur de capture (libpcap) et de détection en Rust : décodage Ethernet, VLAN, IPv4/IPv6, TCP, UDP ; détection de scans de ports, SYN flood et débit anormal sur fenêtre glissante, avec mémoire bornée.</li>
+                <li>Dashboard Angular en WebSocket (carte du trafic en direct), historique SQLite ; tests Rust et Angular en CI.</li>
+              </ul>
+              <p class="more">
+                <a href="https://ibrahimkakaev.github.io/NetWatch-IDS/">Démo</a>
+                <a href="https://github.com/IbrahimKakaev/NetWatch-IDS">Code</a>
+              </p>
+            </div>
+          </li>
+          <li class="row">
+            <span class="when">2026</span>
+            <div class="what">
               <h3>CERISoNet, application web full-stack</h3>
               <p class="stack">Angular, Node.js, Express.js, Socket.IO, MongoDB, PostgreSQL, Docker</p>
               <ul>
                 <li>Application de réseau social avec communication en temps réel par WebSockets : fil d'actualité, likes, commentaires, partages et liste des utilisateurs connectés.</li>
                 <li>Architecture à deux bases de données : PostgreSQL pour les comptes, MongoDB pour les publications et les sessions.</li>
                 <li>Lancement complet en une commande avec Docker Compose.</li>
+                <li>269 tests (API, sécurité, temps réel), CodeQL et Lighthouse en CI.</li>
               </ul>
-              <p class="more"><a href="https://github.com/IbrahimKakaev/CERISoNet">Voir le code sur GitHub</a></p>
-            </div>
-          </li>
-          <li class="row">
-            <span class="when">2026</span>
-            <div class="what">
-              <h3>Bot Telegram de montage vidéo</h3>
-              <p class="stack">Python, FFmpeg, MoviePy, OpenCV, librosa, yt-dlp</p>
-              <ul>
-                <li>Automatisation du montage vidéo : détection de scènes, découpage, synchronisation audio et plusieurs modes de téléchargement.</li>
-                <li>Automatisation de la récupération de données web.</li>
-              </ul>
+              <p class="more">
+                <a href="https://ibrahimkakaev.github.io/CERISoNet/">Démo</a>
+                <a href="https://github.com/IbrahimKakaev/CERISoNet">Code</a>
+              </p>
             </div>
           </li>
           <li class="row">
@@ -73,7 +99,22 @@
                 <li>Treize rapports de pentest et de CTF suivant une méthodologie complète : reconnaissance, énumération, exploitation, élévation de privilèges et recommandations de remédiation.</li>
                 <li>Machines VulnHub compromises, modules TryHackMe et challenges Root-Me, réalisés sur des plateformes d'entraînement légales.</li>
               </ul>
-              <p class="more"><a href="reports.html">Voir les rapports</a></p>
+              <p class="more">
+                <a href="reports.html">Voir les rapports</a>
+                <a href="https://www.root-me.org/MIK_Sparrow?lang=fr">Root-Me</a>
+              </p>
+            </div>
+          </li>
+          <li class="row">
+            <span class="when">2026</span>
+            <div class="what">
+              <h3>Bot Telegram de montage vidéo</h3>
+              <p class="stack">Python, FFmpeg, MoviePy, OpenCV, librosa, yt-dlp</p>
+              <ul>
+                <li>Automatisation du montage vidéo : détection de scènes, découpage, synchronisation audio et plusieurs modes de téléchargement.</li>
+                <li>Automatisation de la récupération de données web.</li>
+              </ul>
+              <!-- TODO : ajouter le lien « Code » du bot Telegram si le dépôt est public. -->
             </div>
           </li>
           <li class="row">
@@ -128,6 +169,13 @@
             </div>
           </li>
           <li class="row">
+            <span class="when">2022 à 2026</span>
+            <div class="what">
+              <h3>Employé polyvalent et logistique, intérim</h3>
+              <p class="stack">Action, Leclerc Drive, Basic-Fit, Domino's</p>
+            </div>
+          </li>
+          <li class="row">
             <span class="when">2020 à 2025</span>
             <div class="what">
               <h3>Animateur jeunesse et référent</h3>
@@ -146,19 +194,21 @@
         <h2>Compétences</h2>
         <dl class="skills">
           <dt>Langages</dt>
-          <dd>C++, Python, Java, JavaScript, TypeScript, PHP, Rust, XQuery, LaTeX</dd>
-          <dt>Web et API</dt>
-          <dd>Angular, React, Node.js, Express.js, Spring Boot, Jakarta, RxJS, Socket.IO, API REST</dd>
+          <dd>Java 21, TypeScript, JavaScript, Rust, Python, C++, PHP, SQL</dd>
+          <dt>Back-end</dt>
+          <dd>Spring Boot, Spring Security, JPA, Flyway, Jakarta EE, Node.js, Express.js, API REST, WebSocket, SSE</dd>
+          <dt>Front-end</dt>
+          <dd>Angular (signals, composants autonomes), RxJS, React</dd>
           <dt>Données</dt>
-          <dd>PostgreSQL, MySQL, MongoDB, Hadoop</dd>
-          <dt>DevOps et cloud</dt>
-          <dd>Linux, Git, GitHub, Docker, CI/CD, Apache, AWS</dd>
+          <dd>PostgreSQL, pgvector, MongoDB, MySQL, SQLite</dd>
+          <dt>DevOps</dt>
+          <dd>Linux, Git, Docker, Docker Compose, GitHub Actions, CodeQL, Trivy</dd>
           <dt>Tests</dt>
-          <dd>JUnit, Jest, PyTest</dd>
+          <dd>JUnit, Testcontainers, Jest, Vitest, PyTest</dd>
+          <dt>IA et sécurité</dt>
+          <dd>RAG, embeddings (ONNX), API LLM ; JWT, OWASP, pentest (Nmap, Burp Suite, Metasploit)</dd>
           <dt>Méthodes</dt>
-          <dd>UML, MVC, ORM, Scrum, Jira</dd>
-          <dt>Systèmes</dt>
-          <dd>Multithreading, calcul GPU, tests d'intrusion</dd>
+          <dd>UML, MVC, Scrum, Jira</dd>
         </dl>
       </div>
     </section>
