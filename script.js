@@ -325,7 +325,7 @@
   /* La légende sous la carte donne les technologies du projet survolé. */
   function showInfo() {
     if (!caption) return;
-    var text = active && active.info ? active.label + " : " + active.info : captionText;
+    var text = active && active.info ? active.label + (document.documentElement.lang === "fr" ? " : " : ": ") + active.info : captionText;
     if (caption.textContent !== text) caption.textContent = text;
   }
 
