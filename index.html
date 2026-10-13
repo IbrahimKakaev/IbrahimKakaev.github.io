@@ -22,22 +22,38 @@
   <meta name="twitter:description" content="Ibrahim Kakaev, développeur full-stack Java, Spring Boot et Angular, avec un intérêt marqué pour la sécurité applicative. Je cherche un stage de fin d'études de 6 mois à Toulouse ou Albi, à partir de janvier 2027.">
   <!-- TODO : aucune image de partage dans le dépôt. Ajouter une image 1200 × 630 px (par exemple og-image.png),
        puis les balises og:image et twitter:image avec son URL absolue, et passer twitter:card à « summary_large_image ». -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Literata:ital,opsz,wght@0,7..72,400..600;1,7..72,400&display=swap" rel="stylesheet">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0a1216">
+  <script>try{if(localStorage.getItem("theme")==="light")document.documentElement.dataset.theme="light"}catch(e){}</script>
+  <link rel="preload" href="fonts/syne-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <a class="skip" href="#projets">Aller aux projets</a>
 
-  <header class="hero">
-    <div class="wrap">
-      <nav class="lang" aria-label="Langue">
-        <span lang="fr" aria-current="true">FR</span>
-        <span aria-hidden="true">|</span>
-        <a href="en/index.html" lang="en" hreflang="en" title="English version">EN</a>
+  <header class="top">
+    <div class="wrap top-in">
+      <a class="brand" href="index.html">Ibrahim Kakaev</a>
+      <nav class="top-nav" aria-label="Sections">
+        <a href="#projets">Projets</a>
+        <a href="#experience">Expérience</a>
+        <a href="#competences">Compétences</a>
+        <a href="#formation">Formation</a>
+        <a href="#contact">Contact</a>
       </nav>
+      <nav class="lang" aria-label="Langue">
+      <span lang="fr" aria-current="true">FR</span>
+      <span aria-hidden="true">|</span>
+      <a href="en/index.html" lang="en" hreflang="en" title="English version">EN</a>
+      </nav>
+      <button class="theme" type="button" hidden data-light="Clair" data-dark="Sombre" data-to-light="Passer en mode clair" data-to-dark="Passer en mode sombre">Clair</button>
     </div>
+    <div class="route" aria-hidden="true"></div>
+  </header>
+
+  <main>
+  <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-text">
         <h1 class="name">Ibrahim<br>Kakaev</h1>
@@ -55,18 +71,18 @@
           <a href="https://www.root-me.org/MIK_Sparrow?lang=fr">Root-Me</a>
         </p>
       </div>
-      <div class="board-wrap" aria-hidden="true">
-        <svg id="board" class="board" role="presentation" focusable="false"></svg>
+      <div class="net-wrap" aria-hidden="true">
+        <canvas id="net" class="net"></canvas>
+        <p class="net-caption">Carte du réseau&nbsp;: mes projets et les technologies qui les relient. Survolez un nœud, cliquez sur un projet pour y aller.</p>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main>
     <section id="projets" class="section">
       <div class="wrap">
         <h2>Projets</h2>
         <ol class="rows">
-          <li class="row">
+          <li class="row" data-node="Sésame">
             <span class="when">2026</span>
             <div class="what">
               <h3>Sésame, recherche documentaire d'entreprise par IA</h3>
@@ -82,7 +98,7 @@
               </p>
             </div>
           </li>
-          <li class="row">
+          <li class="row" data-node="NetWatch IDS">
             <span class="when">2026</span>
             <div class="what">
               <h3>NetWatch IDS, détection d'intrusion réseau en temps réel</h3>
@@ -97,7 +113,7 @@
               </p>
             </div>
           </li>
-          <li class="row">
+          <li class="row" data-node="CERISoNet">
             <span class="when">2026</span>
             <div class="what">
               <h3>CERISoNet, application web full-stack</h3>
@@ -114,7 +130,7 @@
               </p>
             </div>
           </li>
-          <li class="row">
+          <li class="row" data-node="Pentest">
             <span class="when">2026</span>
             <div class="what">
               <h3>Test d'intrusion et cybersécurité</h3>
@@ -129,7 +145,7 @@
               </p>
             </div>
           </li>
-          <li class="row">
+          <li class="row" data-node="Yalta">
             <span class="when">2025</span>
             <div class="what">
               <h3>Yalta, échecs hexagonaux à trois joueurs</h3>
@@ -140,7 +156,7 @@
               </ul>
             </div>
           </li>
-          <li class="row">
+          <li class="row" data-node="Application Jakarta">
             <span class="when">2025</span>
             <div class="what">
               <h3>Application Jakarta</h3>
@@ -150,7 +166,7 @@
               </ul>
             </div>
           </li>
-          <li class="row">
+          <li class="row" data-node="Big Data">
             <span class="when">2025</span>
             <div class="what">
               <h3>Big Data et gestion documentaire</h3>
@@ -169,7 +185,7 @@
       <div class="wrap">
         <h2>Expérience</h2>
         <ol class="rows">
-          <li class="row">
+          <li class="row" data-node="Stage DSI" data-tech="PHP, JavaScript, MySQL">
             <span class="when">2024</span>
             <div class="what">
               <h3>Développeur full-stack, stage de 2 mois</h3>
@@ -275,6 +291,6 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>

@@ -22,22 +22,38 @@
   <meta name="twitter:description" content="Ibrahim Kakaev, full-stack Java, Spring Boot and Angular developer with a strong interest in application security. Looking for a 6-month end-of-studies internship in Toulouse or Albi, starting January 2027.">
   <!-- TODO: no sharing image in the repository. Add a 1200 × 630 px image (e.g. og-image.png),
        then the og:image and twitter:image tags with its absolute URL, and switch twitter:card to "summary_large_image". -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Literata:ital,opsz,wght@0,7..72,400..600;1,7..72,400&display=swap" rel="stylesheet">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0a1216">
+  <script>try{if(localStorage.getItem("theme")==="light")document.documentElement.dataset.theme="light"}catch(e){}</script>
+  <link rel="preload" href="../fonts/syne-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
   <a class="skip" href="#projects">Skip to projects</a>
 
-  <header class="hero">
-    <div class="wrap">
-      <nav class="lang" aria-label="Language">
-        <a href="../index.html" lang="fr" hreflang="fr" title="Version française">FR</a>
-        <span aria-hidden="true">|</span>
-        <span lang="en" aria-current="true">EN</span>
+  <header class="top">
+    <div class="wrap top-in">
+      <a class="brand" href="index.html">Ibrahim Kakaev</a>
+      <nav class="top-nav" aria-label="Sections">
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
       </nav>
+      <nav class="lang" aria-label="Language">
+      <a href="../index.html" lang="fr" hreflang="fr" title="Version française">FR</a>
+      <span aria-hidden="true">|</span>
+      <span lang="en" aria-current="true">EN</span>
+      </nav>
+      <button class="theme" type="button" hidden data-light="Light" data-dark="Dark" data-to-light="Switch to light mode" data-to-dark="Switch to dark mode">Light</button>
     </div>
+    <div class="route" aria-hidden="true"></div>
+  </header>
+
+  <main>
+  <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-text">
         <h1 class="name">Ibrahim<br>Kakaev</h1>
@@ -56,18 +72,18 @@
           <a href="https://www.root-me.org/MIK_Sparrow?lang=fr">Root-Me</a>
         </p>
       </div>
-      <div class="board-wrap" aria-hidden="true">
-        <svg id="board" class="board" role="presentation" focusable="false"></svg>
+      <div class="net-wrap" aria-hidden="true">
+        <canvas id="net" class="net"></canvas>
+        <p class="net-caption">Network map: my projects and the technologies that connect them. Hover a node, click a project to jump to it.</p>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main>
     <section id="projects" class="section">
       <div class="wrap">
         <h2>Projects</h2>
         <ol class="rows">
-          <li class="row">
+          <li class="row" data-node="Sésame">
             <span class="when">2026</span>
             <div class="what">
               <h3>Sésame, AI-powered enterprise document search</h3>
@@ -83,7 +99,7 @@
               </p>
             </div>
           </li>
-          <li class="row">
+          <li class="row" data-node="NetWatch IDS">
             <span class="when">2026</span>
             <div class="what">
               <h3>NetWatch IDS, real-time network intrusion detection</h3>
@@ -98,7 +114,7 @@
               </p>
             </div>
           </li>
-          <li class="row">
+          <li class="row" data-node="CERISoNet">
             <span class="when">2026</span>
             <div class="what">
               <h3>CERISoNet, full-stack web application</h3>
@@ -115,7 +131,7 @@
               </p>
             </div>
           </li>
-          <li class="row">
+          <li class="row" data-node="Pentest">
             <span class="when">2026</span>
             <div class="what">
               <h3>Penetration testing and cybersecurity</h3>
@@ -130,7 +146,7 @@
               </p>
             </div>
           </li>
-          <li class="row">
+          <li class="row" data-node="Yalta">
             <span class="when">2025</span>
             <div class="what">
               <h3>Yalta, three-player hexagonal chess</h3>
@@ -141,7 +157,7 @@
               </ul>
             </div>
           </li>
-          <li class="row">
+          <li class="row" data-node="Jakarta application">
             <span class="when">2025</span>
             <div class="what">
               <h3>Jakarta application</h3>
@@ -151,7 +167,7 @@
               </ul>
             </div>
           </li>
-          <li class="row">
+          <li class="row" data-node="Big Data">
             <span class="when">2025</span>
             <div class="what">
               <h3>Big Data and document management</h3>
@@ -170,7 +186,7 @@
       <div class="wrap">
         <h2>Experience</h2>
         <ol class="rows">
-          <li class="row">
+          <li class="row" data-node="DSI internship" data-tech="PHP, JavaScript, MySQL">
             <span class="when">2024</span>
             <div class="what">
               <h3>Full-stack developer, 2-month internship</h3>
@@ -276,6 +292,6 @@
     </div>
   </footer>
 
-  <script src="../script.js"></script>
+  <script src="../script.js" defer></script>
 </body>
 </html>

@@ -21,26 +21,38 @@
   <meta name="twitter:title" content="Rapports de cybersécurité — Ibrahim Kakaev">
   <meta name="twitter:description" content="Rapports de pentest et de CTF réalisés par Ibrahim Kakaev sur VulnHub, TryHackMe et Root-Me, dans le cadre de sa formation.">
   <!-- TODO : ajouter og:image et twitter:image quand une image de partage existera (voir index.html). -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Literata:ital,opsz,wght@0,7..72,400..600;1,7..72,400&display=swap" rel="stylesheet">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0a1216">
+  <script>try{if(localStorage.getItem("theme")==="light")document.documentElement.dataset.theme="light"}catch(e){}</script>
+  <link rel="preload" href="fonts/syne-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="hero reports-hero">
-    <div class="wrap">
+  <a class="skip" href="#contenu">Aller au contenu</a>
+
+  <header class="top">
+    <div class="wrap top-in">
+      <a class="brand" href="index.html">Ibrahim Kakaev</a>
       <nav class="lang" aria-label="Langue">
-        <span lang="fr" aria-current="true">FR</span>
-        <span aria-hidden="true">|</span>
-        <a href="en/reports.html" lang="en" hreflang="en" title="English version">EN</a>
+      <span lang="fr" aria-current="true">FR</span>
+      <span aria-hidden="true">|</span>
+      <a href="en/reports.html" lang="en" hreflang="en" title="English version">EN</a>
       </nav>
+      <button class="theme" type="button" hidden data-light="Clair" data-dark="Sombre" data-to-light="Passer en mode clair" data-to-dark="Passer en mode sombre">Clair</button>
+    </div>
+    <div class="route" aria-hidden="true"></div>
+  </header>
+
+  <main id="contenu">
+  <section class="hero reports-hero">
+    <div class="wrap">
       <p class="back"><a href="index.html">← Retour au portfolio</a></p>
       <h1 class="name reports-name">Rapports de cybersécurité</h1>
       <p class="pitch">Treize rapports de pentest et de CTF rédigés dans le cadre de ma formation, sur des plateformes d'entraînement légales. Chaque rapport suit une méthodologie complète&nbsp;: reconnaissance, énumération, exploitation, élévation de privilèges, puis recommandations de remédiation.</p>
     </div>
-  </header>
+  </section>
 
-  <main>
     <section class="section">
       <div class="wrap">
 
@@ -202,5 +214,6 @@
       <p>Ibrahim Kakaev, Albi et Toulouse. Nationalité française, permis B.</p>
     </div>
   </footer>
+  <script src="script.js" defer></script>
 </body>
 </html>

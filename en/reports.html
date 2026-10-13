@@ -21,26 +21,38 @@
   <meta name="twitter:title" content="Cybersecurity reports — Ibrahim Kakaev">
   <meta name="twitter:description" content="Pentest and CTF reports written by Ibrahim Kakaev on VulnHub, TryHackMe and Root-Me, as part of his studies.">
   <!-- TODO: add og:image and twitter:image once a sharing image exists (see index.html). -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Literata:ital,opsz,wght@0,7..72,400..600;1,7..72,400&display=swap" rel="stylesheet">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0a1216">
+  <script>try{if(localStorage.getItem("theme")==="light")document.documentElement.dataset.theme="light"}catch(e){}</script>
+  <link rel="preload" href="../fonts/syne-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../fonts/plex-sans-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-  <header class="hero reports-hero">
-    <div class="wrap">
+  <a class="skip" href="#contenu">Skip to content</a>
+
+  <header class="top">
+    <div class="wrap top-in">
+      <a class="brand" href="index.html">Ibrahim Kakaev</a>
       <nav class="lang" aria-label="Language">
-        <a href="../reports.html" lang="fr" hreflang="fr" title="Version française">FR</a>
-        <span aria-hidden="true">|</span>
-        <span lang="en" aria-current="true">EN</span>
+      <a href="../reports.html" lang="fr" hreflang="fr" title="Version française">FR</a>
+      <span aria-hidden="true">|</span>
+      <span lang="en" aria-current="true">EN</span>
       </nav>
+      <button class="theme" type="button" hidden data-light="Light" data-dark="Dark" data-to-light="Switch to light mode" data-to-dark="Switch to dark mode">Light</button>
+    </div>
+    <div class="route" aria-hidden="true"></div>
+  </header>
+
+  <main id="contenu">
+  <section class="hero reports-hero">
+    <div class="wrap">
       <p class="back"><a href="index.html">← Back to the portfolio</a></p>
       <h1 class="name reports-name">Cybersecurity reports</h1>
       <p class="pitch">Thirteen pentest and CTF reports written as part of my studies, on legal training platforms. Each report follows a complete methodology: reconnaissance, enumeration, exploitation, privilege escalation, then remediation recommendations. The reports themselves are written in French.</p>
     </div>
-  </header>
+  </section>
 
-  <main>
     <section class="section">
       <div class="wrap">
 
@@ -202,5 +214,6 @@
       <p>Ibrahim Kakaev, Albi and Toulouse. French citizen, full driving licence.</p>
     </div>
   </footer>
+  <script src="../script.js" defer></script>
 </body>
 </html>

@@ -1,42 +1,22 @@
-/* Plateau hexagonal du hero : 91 cases, trois tons, révélées du centre vers l'extérieur. */
+/* Thème : sombre par défaut, clair sur demande, choix mémorisé. */
 (function () {
-  var svg = document.getElementById("board");
-  if (!svg) return;
+  var root = document.documentElement;
+  var btn = document.querySelector(".theme");
+  if (!btn) return;
 
-  var NS = "http://www.w3.org/2000/svg";
-  var RADIUS = 5;      // 5 anneaux autour de la case centrale, soit 91 cases
-  var SIZE = 26;       // rayon d'une case
-  var GAP = 0.93;      // espace entre les cases
-  var SQRT3 = Math.sqrt(3);
-
-  var halfW = 1.5 * RADIUS * SIZE + SIZE + 2;
-  var halfH = SQRT3 * SIZE * (RADIUS + 0.5) + 2;
-  svg.setAttribute("viewBox", [-halfW, -halfH, halfW * 2, halfH * 2].join(" "));
-
-  function points(cx, cy) {
-    var pts = [];
-    for (var i = 0; i < 6; i++) {
-      var a = (Math.PI / 180) * (60 * i);
-      pts.push((cx + SIZE * GAP * Math.cos(a)).toFixed(2) + "," + (cy + SIZE * GAP * Math.sin(a)).toFixed(2));
-    }
-    return pts.join(" ");
+  function sync() {
+    var light = root.dataset.theme === "light";
+    btn.textContent = light ? btn.dataset.dark : btn.dataset.light;
+    btn.setAttribute("aria-label", light ? btn.dataset.toDark : btn.dataset.toLight);
   }
 
-  for (var q = -RADIUS; q <= RADIUS; q++) {
-    for (var r = -RADIUS; r <= RADIUS; r++) {
-      var s = -q - r;
-      var dist = Math.max(Math.abs(q), Math.abs(r), Math.abs(s));
-      if (dist > RADIUS) continue;
-
-      var cx = SIZE * 1.5 * q;
-      var cy = SIZE * SQRT3 * (r + q / 2);
-      var tone = (((q - r) % 3) + 3) % 3;
-
-      var cell = document.createElementNS(NS, "polygon");
-      cell.setAttribute("points", points(cx, cy));
-      cell.setAttribute("class", "cell tone" + tone);
-      cell.style.setProperty("--delay", dist * 90 + "ms");
-      svg.appendChild(cell);
-    }
-  }
+  btn.hidden = false;
+  sync();
+  btn.addEventListener("click", function () {
+    var light = root.dataset.theme !== "light";
+    if (light) root.dataset.theme = "light"; else delete root.dataset.theme;
+    try { localStorage.setItem("theme", light ? "light" : "dark"); } catch (e) {}
+    sync();
+    document.dispatchEvent(new Event("themechange"));
+  });
 })();
