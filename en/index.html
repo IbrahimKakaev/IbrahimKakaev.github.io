@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ibrahim Kakaev, full-stack Java / Angular developer</title>
+  <meta name="description" content="Ibrahim Kakaev, full-stack Java, Spring Boot and Angular developer with a strong interest in application security. Looking for a 6-month end-of-studies internship in Toulouse or Albi, starting January 2027.">
+  <link rel="canonical" href="https://ibrahimkakaev.github.io/en/">
+  <link rel="alternate" hreflang="fr" href="https://ibrahimkakaev.github.io/">
+  <link rel="alternate" hreflang="en" href="https://ibrahimkakaev.github.io/en/">
+  <link rel="alternate" hreflang="x-default" href="https://ibrahimkakaev.github.io/">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Ibrahim Kakaev">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="fr_FR">
+  <meta property="og:url" content="https://ibrahimkakaev.github.io/en/">
+  <meta property="og:title" content="Ibrahim Kakaev, full-stack Java / Angular developer">
+  <meta property="og:description" content="Ibrahim Kakaev, full-stack Java, Spring Boot and Angular developer with a strong interest in application security. Looking for a 6-month end-of-studies internship in Toulouse or Albi, starting January 2027.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Ibrahim Kakaev, full-stack Java / Angular developer">
+  <meta name="twitter:description" content="Ibrahim Kakaev, full-stack Java, Spring Boot and Angular developer with a strong interest in application security. Looking for a 6-month end-of-studies internship in Toulouse or Albi, starting January 2027.">
+  <!-- TODO: no sharing image in the repository. Add a 1200 × 630 px image (e.g. og-image.png),
+       then the og:image and twitter:image tags with its absolute URL, and switch twitter:card to "summary_large_image". -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;700;800&family=Literata:ital,opsz,wght@0,7..72,400..600;1,7..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <a class="skip" href="#projects">Skip to projects</a>
+
+  <header class="hero">
+    <div class="wrap">
+      <nav class="lang" aria-label="Language">
+        <a href="../index.html" lang="fr" hreflang="fr" title="Version française">FR</a>
+        <span aria-hidden="true">|</span>
+        <span lang="en" aria-current="true">EN</span>
+      </nav>
+    </div>
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <h1 class="name">Ibrahim<br>Kakaev</h1>
+        <p class="role">Full-stack developer, Java / Spring Boot · Angular</p>
+        <p class="pitch">I build complete applications, from the Spring Boot or Rust API to the Angular interface, delivered tested: continuous integration, security analysis and a live demo. Strong interest in application security.</p>
+        <p class="availability">
+          <span class="dot" aria-hidden="true"></span>
+          I am looking for a 6-month end-of-studies internship in Toulouse or Albi, starting January 2027. Available immediately, an earlier start is possible.
+        </p>
+        <p class="hero-links">
+          <a href="#contact">Contact me</a>
+          <!-- TODO: link an English CV here if one is added to the repository (the current PDF is in French). -->
+          <a href="../cv-ibrahim-kakaev.pdf" hreflang="fr">Download my CV (in French)</a>
+          <a href="https://github.com/IbrahimKakaev">GitHub</a>
+          <a href="https://www.linkedin.com/in/ibrahim-kakaev-7b11282a0">LinkedIn</a>
+          <a href="https://www.root-me.org/MIK_Sparrow?lang=fr">Root-Me</a>
+        </p>
+      </div>
+      <div class="board-wrap" aria-hidden="true">
+        <svg id="board" class="board" role="presentation" focusable="false"></svg>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="projects" class="section">
+      <div class="wrap">
+        <h2>Projects</h2>
+        <ol class="rows">
+          <li class="row">
+            <span class="when">2026</span>
+            <div class="what">
+              <h3>Sésame, AI-powered enterprise document search</h3>
+              <p class="stack">Java 21, Spring Boot, Spring Security, PostgreSQL/pgvector, Angular, Docker</p>
+              <ul>
+                <li>An LLM answers questions about PDFs and cites its sources, without ever receiving a passage the user is not allowed to see: filtering by groups in the SQL query, before any call to the model.</li>
+                <li>Isolation tests for every user-document pair on every route, leak tests on the request sent to the LLM, immediate revocation of access rights; documented threat model.</li>
+                <li>JWT with rotation and replay detection, audit log; 24 out of 24 sources retrieved in the evaluation; CI with CodeQL and Trivy.</li>
+              </ul>
+              <p class="more">
+                <a href="https://ibrahimkakaev.github.io/Sesame/">Demo</a>
+                <a href="https://github.com/IbrahimKakaev/Sesame">Code</a>
+              </p>
+            </div>
+          </li>
+          <li class="row">
+            <span class="when">2026</span>
+            <div class="what">
+              <h3>NetWatch IDS, real-time network intrusion detection</h3>
+              <p class="stack">Rust, Tokio, axum, Angular, SQLite</p>
+              <ul>
+                <li>Capture (libpcap) and detection engine in Rust: decoding of Ethernet, VLAN, IPv4/IPv6, TCP and UDP; detection of port scans, SYN floods and abnormal throughput over a sliding window, with bounded memory.</li>
+                <li>Angular dashboard over WebSocket (live traffic map), SQLite history; Rust and Angular tests in CI.</li>
+              </ul>
+              <p class="more">
+                <a href="https://ibrahimkakaev.github.io/NetWatch-IDS/">Demo</a>
+                <a href="https://github.com/IbrahimKakaev/NetWatch-IDS">Code</a>
+              </p>
+            </div>
+          </li>
+          <li class="row">
+            <span class="when">2026</span>
+            <div class="what">
+              <h3>CERISoNet, full-stack web application</h3>
+              <p class="stack">Angular, Node.js, Express.js, Socket.IO, MongoDB, PostgreSQL, Docker</p>
+              <ul>
+                <li>Social network application with real-time communication over WebSockets: news feed, likes, comments, shares and a list of connected users.</li>
+                <li>Two-database architecture: PostgreSQL for accounts, MongoDB for posts and sessions.</li>
+                <li>Full launch with a single command using Docker Compose.</li>
+                <li>269 tests (API, security, real time), CodeQL and Lighthouse in CI.</li>
+              </ul>
+              <p class="more">
+                <a href="https://ibrahimkakaev.github.io/CERISoNet/">Demo</a>
+                <a href="https://github.com/IbrahimKakaev/CERISoNet">Code</a>
+              </p>
+            </div>
+          </li>
+          <li class="row">
+            <span class="when">2026</span>
+            <div class="what">
+              <h3>Penetration testing and cybersecurity</h3>
+              <p class="stack">Kali Linux, Nmap, Metasploit, Burp Suite, SQLMap, VulnHub, TryHackMe, Root-Me</p>
+              <ul>
+                <li>Thirteen pentest and CTF reports following a complete methodology: reconnaissance, enumeration, exploitation, privilege escalation and remediation recommendations.</li>
+                <li>Compromised VulnHub machines, TryHackMe modules and Root-Me challenges, carried out on legal training platforms.</li>
+              </ul>
+              <p class="more">
+                <a href="reports.html">View the reports</a>
+                <a href="https://www.root-me.org/MIK_Sparrow?lang=fr">Root-Me</a>
+              </p>
+            </div>
+          </li>
+          <li class="row">
+            <span class="when">2026</span>
+            <div class="what">
+              <h3>Telegram video-editing bot</h3>
+              <p class="stack">Python, FFmpeg, MoviePy, OpenCV, librosa, yt-dlp</p>
+              <ul>
+                <li>Video editing automation: scene detection, cutting, audio synchronisation and several download modes.</li>
+                <li>Automated web data collection.</li>
+              </ul>
+              <!-- TODO: add the "Code" link for the Telegram bot if the repository is public. -->
+            </div>
+          </li>
+          <li class="row">
+            <span class="when">2025</span>
+            <div class="what">
+              <h3>Yalta, three-player hexagonal chess</h3>
+              <p class="stack">C++, SFML</p>
+              <ul>
+                <li>Three-player chess game on a 96-cell hexagonal board: game logic, graphics rendering and an AI opponent based on the MinMax algorithm.</li>
+                <li>MVC architecture and move undo.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="row">
+            <span class="when">2025</span>
+            <div class="what">
+              <h3>Jakarta application</h3>
+              <p class="stack">Jakarta, EJB, JPA, Payara, PostgreSQL</p>
+              <ul>
+                <li>EJB components with JPA persistence, deployed on Payara and connected to PostgreSQL.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="row">
+            <span class="when">2025</span>
+            <div class="what">
+              <h3>Big Data and document management</h3>
+              <p class="stack">Hadoop, Docker, Alfresco, Linux, XQuery</p>
+              <ul>
+                <li>Distributed MapReduce processing with Hadoop in a Docker environment.</li>
+                <li>Installation and troubleshooting of Alfresco Community Edition, XML querying with XQuery.</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="experience" class="section">
+      <div class="wrap">
+        <h2>Experience</h2>
+        <ol class="rows">
+          <li class="row">
+            <span class="when">2024</span>
+            <div class="what">
+              <h3>Full-stack developer, 2-month internship</h3>
+              <p class="stack">DSI Grand Albigeois (IT department), Albi. PHP, JavaScript, MySQL</p>
+              <ul>
+                <li>Development of a web search interface for the town hall's reception secretaries.</li>
+                <li>Processing and structuring of complex data from scanned documents, and database design.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="row">
+            <span class="when">2022 to 2026</span>
+            <div class="what">
+              <h3>General and logistics worker, temporary work</h3>
+              <p class="stack">Action, Leclerc Drive, Basic-Fit, Domino's</p>
+            </div>
+          </li>
+          <li class="row">
+            <span class="when">2020 to 2025</span>
+            <div class="what">
+              <h3>Youth activity leader and team lead</h3>
+              <p class="stack">CROUS, Grand Albigeois, Handiligue</p>
+              <ul>
+                <li>Supervision of groups of young people and responsibility for a team in the field.</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="wrap">
+        <h2>Skills</h2>
+        <dl class="skills">
+          <dt>Languages</dt>
+          <dd>Java 21, TypeScript, JavaScript, Rust, Python, C++, PHP, SQL</dd>
+          <dt>Back-end</dt>
+          <dd>Spring Boot, Spring Security, JPA, Flyway, Jakarta EE, Node.js, Express.js, REST API, WebSocket, SSE</dd>
+          <dt>Front-end</dt>
+          <dd>Angular (signals, standalone components), RxJS, React</dd>
+          <dt>Data</dt>
+          <dd>PostgreSQL, pgvector, MongoDB, MySQL, SQLite</dd>
+          <dt>DevOps</dt>
+          <dd>Linux, Git, Docker, Docker Compose, GitHub Actions, CodeQL, Trivy</dd>
+          <dt>Testing</dt>
+          <dd>JUnit, Testcontainers, Jest, Vitest, PyTest</dd>
+          <dt>AI and security</dt>
+          <dd>RAG, embeddings (ONNX), LLM APIs; JWT, OWASP, pentest (Nmap, Burp Suite, Metasploit)</dd>
+          <dt>Methods</dt>
+          <dd>UML, MVC, Scrum, Jira</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section id="education" class="section">
+      <div class="wrap">
+        <h2>Education</h2>
+        <ol class="rows">
+          <li class="row">
+            <span class="when">2024 to present</span>
+            <div class="what">
+              <h3>Master's degree in Computer Science, Software Engineering</h3>
+              <p class="stack">Avignon Université</p>
+            </div>
+          </li>
+          <li class="row">
+            <span class="when">2021 to 2024</span>
+            <div class="what">
+              <h3>Bachelor's degree (Licence) in Computer Science, Web Technology option</h3>
+              <p class="stack">INU Champollion, Albi</p>
+            </div>
+          </li>
+          <li class="row">
+            <span class="when">2019 to 2021</span>
+            <div class="what">
+              <h3>Baccalauréat, Computer Science and English specialities</h3>
+              <p class="stack">Lycée Lapérouse, Albi</p>
+            </div>
+          </li>
+        </ol>
+        <p class="aside">Languages: French (native), Russian (fluent), English (B1). Interests: automation, weight training, hiking, music.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="wrap">
+        <h2>Contact</h2>
+        <p class="contact-lead">An internship, a question about a project? Write to me, I reply quickly.</p>
+        <ul class="contact-list">
+          <li><a href="mailto:ibrahim.kakaev@gmail.com">ibrahim.kakaev@gmail.com</a></li>
+          <li><a href="https://github.com/IbrahimKakaev">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/ibrahim-kakaev-7b11282a0">LinkedIn</a></li>
+          <li><a href="../cv-ibrahim-kakaev.pdf" hreflang="fr">Download my CV (PDF, in French)</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>Ibrahim Kakaev, Albi and Toulouse. French citizen, full driving licence.</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

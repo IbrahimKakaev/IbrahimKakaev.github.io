@@ -61,6 +61,22 @@ a:focus-visible {
 }
 .skip:focus { top: var(--gutter); }
 
+/* Sélecteur de langue */
+
+.lang {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 10px;
+  margin: 0 0 20px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.lang a { padding: 4px 2px; }
+.lang span { color: var(--ink-soft); }
+.lang [aria-current] { color: var(--ink); }
+
 /* Hero */
 
 .hero {
