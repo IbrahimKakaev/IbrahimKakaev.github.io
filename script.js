@@ -24,7 +24,8 @@
 /* Carte du réseau du hero.
    Le graphe est lu dans la page : chaque ligne [data-node] est un projet (ou le stage),
    ses technologies viennent de sa ligne .stack (ou de data-tech). Pour rester lisible,
-   seules les technologies partagées par plusieurs projets deviennent des nœuds ; la liste
+   seules les technologies partagées par plusieurs projets (et celles du titre, data-key)
+   deviennent des nœuds ; la liste
    complète d'un projet s'affiche dans la légende au survol. */
 (function () {
   var canvas = document.getElementById("net");
@@ -61,7 +62,11 @@
       if (name) link(hub, node("tech:" + name.toLowerCase(), name, "tech", null));
     });
   });
-  nodes = nodes.filter(function (n) { return n.type !== "tech" || n.links.length > 1; });
+  /* data-key : technologies du titre, affichées même si un seul projet les utilise. */
+  var keys = (canvas.dataset.key || "").toLowerCase().split(/\s*,\s*/);
+  nodes = nodes.filter(function (n) {
+    return n.type !== "tech" || n.links.length > 1 || keys.indexOf(n.label.toLowerCase()) >= 0;
+  });
   links = links.filter(function (l) { return nodes.indexOf(l.a) >= 0 && nodes.indexOf(l.b) >= 0; });
   nodes.forEach(function (n) {
     n.links = n.links.filter(function (l) { return links.indexOf(l) >= 0; });
@@ -91,7 +96,8 @@
         n.cx += hub.x / n.links.length;
         n.cy += hub.y / n.links.length;
       });
-      n.x = n.cx * 0.8; n.y = n.cy * 0.8;
+      n.cx *= 0.6; n.cy *= 0.6;   // tirées vers l'intérieur, à l'écart des noms de projets
+      n.x = n.cx; n.y = n.cy;
     });
     for (var it = 0; it < 400; it++) {
       techs.forEach(function (n) {
@@ -100,8 +106,9 @@
           if (o === n) return;
           var dx = n.x - o.x, dy = n.y - o.y;
           var d2 = dx * dx + dy * dy + 0.0001;
-          fx += (dx / d2) * 0.006;
-          fy += (dy / d2) * 0.006;
+          var push = o.type === "tech" ? 0.03 : 0.014;   // les technologies s'écartent surtout entre elles
+          fx += (dx / d2) * push;
+          fy += (dy / d2) * push;
         });
         var r = Math.sqrt(fx * fx + fy * fy) || 0.001;
         var stepLen = Math.min(r, 0.03) / r;
