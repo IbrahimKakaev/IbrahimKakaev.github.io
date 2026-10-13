@@ -457,6 +457,110 @@ h3 {
   color: var(--muted);
 }
 
+/* Parcours : carte schématique (villes placées selon leurs coordonnées réelles) */
+
+.path {
+  display: grid;
+  gap: 20px 40px;
+  align-items: center;
+  margin: 0 0 clamp(28px, 4vw, 44px);
+  container-type: inline-size;
+}
+
+.path-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 560px;
+  border: 1px solid var(--rule);
+  background: var(--bg);
+}
+
+.path-sea { fill: var(--surface); }
+.path-coast { fill: none; stroke: var(--edge); stroke-width: 1.5; }
+.path-water { fill: var(--muted); font-family: var(--mono); font-size: 14px; letter-spacing: 0.06em; text-anchor: middle; }
+.path-route { fill: none; stroke: var(--accent); stroke-width: 2.5; }
+.path-goal { fill: none; stroke: var(--text); stroke-width: 1.5; stroke-dasharray: 5 6; }
+.path-stop { fill: var(--accent); stroke: var(--accent); stroke-width: 2; }
+.path-stop-goal { fill: var(--bg); stroke: var(--text); }
+.path-num { fill: var(--on-accent); font-family: var(--mono); font-weight: 500; font-size: 14px; text-anchor: middle; }
+.path-num-goal { fill: var(--text); }
+.path-city { fill: var(--text); font-family: var(--display); font-weight: 700; font-size: 19px; text-anchor: middle; }
+.path-packet { fill: var(--text); opacity: 0; }
+
+.path figcaption { min-width: 0; }
+
+.path-lead {
+  margin: 0 0 14px;
+  max-width: 34rem;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.12rem;
+  line-height: 1.4;
+}
+
+.path-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+  max-width: 34rem;
+}
+
+.path-steps li {
+  counter-increment: step;
+  position: relative;
+  margin: 0 0 12px;
+  padding-left: 34px;
+}
+
+.path-steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.2em;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.path-steps li:last-child::before {
+  background: none;
+  color: var(--text);
+  box-shadow: inset 0 0 0 1.5px var(--text);
+}
+
+.path-steps strong { font-weight: 600; }
+
+@media (min-width: 900px) {
+  .path { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (offset-path: path("M0 0 L1 1")) {
+    .path-packet {
+      opacity: 1;
+      offset-path: path("M118.1 61.1 Q 243 14 368.1 58.5");
+      offset-rotate: 0deg;
+      animation: path-travel 3.6s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes path-travel {
+  0%   { offset-distance: 0%; opacity: 0; }
+  12%  { opacity: 1; }
+  88%  { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0; }
+}
+
 /* Compétences */
 
 .skills {
