@@ -83,7 +83,7 @@ body {
   overflow-x: clip;
 }
 
-[id] { scroll-margin-top: calc(var(--top-h) + 20px); }
+[id], .row { scroll-margin-top: calc(var(--top-h) + 20px); }
 
 .wrap {
   width: 100%;
@@ -156,6 +156,13 @@ button:focus-visible {
   height: 9px;
   margin-right: 10px;
   background: var(--accent);
+}
+
+.brand-full { display: none; }
+
+@media (min-width: 480px) {
+  .brand-full { display: inline; }
+  .brand-short { display: none; }
 }
 
 .top-nav { display: none; gap: 22px; }
@@ -305,7 +312,7 @@ button:focus-visible {
 .net {
   display: block;
   width: 100%;
-  height: clamp(300px, 86vw, 420px);
+  height: clamp(340px, 100vw, 460px);
   touch-action: pan-y;
 }
 
