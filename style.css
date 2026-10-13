@@ -347,7 +347,7 @@ main { counter-reset: section; }
   margin: 0 0 clamp(22px, 4vw, 38px);
   font-family: var(--display);
   font-weight: 800;
-  font-size: clamp(1.9rem, 4.5vw, 2.9rem);
+  font-size: clamp(1.45rem, 7.2vw, 2.9rem);
   letter-spacing: -0.025em;
   line-height: 1.1;
 }
@@ -451,6 +451,9 @@ h3 {
   color: var(--node);
 }
 .what .mini { margin-top: 10px; }
+@media (max-width: 599px) {
+  .mini-stack { display: block; margin-left: 0; }
+}
 .what .mini strong { font-weight: 600; }
 .row + .aside, .rows + .aside { margin-top: 20px; }
 
