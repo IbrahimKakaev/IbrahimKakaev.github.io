@@ -1,0 +1,174 @@
+% =====================================================================
+%  CV - Ibrahim Kakaev (English version)
+%  "Gutter" template: a narrow left column for dates and labels, the
+%  content on the rest. Single reading column, no tables or text boxes:
+%  ATS-friendly.
+%  Compilation: pdfLaTeX (Overleaf's default compiler)
+%  Photo      : import "photo.PNG" at the project root (optional).
+% =====================================================================
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[sfdefault]{FiraSans}
+\usepackage[a4paper,top=1.05cm,bottom=0.9cm,left=1.3cm,right=1.3cm]{geometry}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{calc}
+\usepackage[hidelinks]{hyperref}
+\usepackage[letterspace=120]{microtype}
+
+% PDF text readable by ATS (accents, ligatures)
+\ifdefined\pdfgentounicode
+  \input{glyphtounicode}
+  \pdfgentounicode=1
+\fi
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\raggedright
+
+% ---------- Black and grey only ----------
+\definecolor{ink}{HTML}{161616}
+\definecolor{soft}{HTML}{6A6A6A}
+\definecolor{hair}{HTML}{CFCFCF}
+\color{ink}
+
+% ---------- Grid: gutter width ----------
+% Slightly wider than the French version (2.55cm) so that "2024 · 2 months" fits.
+\newlength{\gut}\setlength{\gut}{2.7cm}
+
+% Section title: thick bar, spaced heading, rule to the edge
+\newcommand{\cvsection}[1]{%
+  \vspace{7pt}%
+  {\color{ink}\rule[-0.5pt]{2.4pt}{9pt}}\hspace{6pt}%
+  {\small\bfseries\MakeUppercase{#1}}\hspace{8pt}%
+  {\color{hair}\leaders\hrule height 3.4pt depth -2.9pt\hfill}\par
+  \vspace{3.5pt}}
+
+% Gutter block: label (date, heading) on the left, content on the right
+\newenvironment{grid}{%
+  \begin{list}{}{\setlength{\leftmargin}{\gut}\setlength{\labelwidth}{\gut-8pt}%
+    \setlength{\labelsep}{8pt}\setlength{\itemsep}{4pt}\setlength{\topsep}{0pt}%
+    \setlength{\parsep}{0pt}\setlength{\partopsep}{0pt}%
+    \renewcommand{\makelabel}[1]{\makebox[\labelwidth][l]{\small\color{soft}##1}}}}
+  {\end{list}}
+
+% Bullets
+\newenvironment{cvitems}{\begin{itemize}[leftmargin=0.95em,itemsep=0pt,topsep=1pt,parsep=0pt,partopsep=0pt,
+  label={\color{soft}\textbullet}]\small}{\end{itemize}}
+
+% Title line: bold heading, grey detail
+\newcommand{\head}[2]{{\bfseries #1}\if\relax\detokenize{#2}\relax\else{\small\color{soft}\hspace{0.5em}·\hspace{0.5em}#2}\fi\par}
+% Project link line (demo, code)
+\newcommand{\links}[1]{{\footnotesize\color{soft}#1}\par}
+\newcommand{\tech}[1]{{\footnotesize\color{soft}#1}\par}
+\newcommand{\sep}{\hspace{0.5em}{\color{hair}|}\hspace{0.5em}}
+
+\begin{document}
+
+% =====================================================================
+%  HEADER
+% =====================================================================
+\begin{minipage}[b]{\textwidth-2.6cm}
+  {\fontsize{27}{29}\selectfont\bfseries Ibrahim Kakaev}\par\vspace{5pt}
+  {\large Full-stack developer Java / Spring Boot · Angular\hspace{0.45em}·\hspace{0.45em}6-month final-year internship}\par\vspace{3pt}
+  {\small\bfseries From January 2027\hspace{0.45em}·\hspace{0.45em}Available immediately, earlier start possible}\par\vspace{6pt}
+  {\small
+   \href{mailto:ibrahim.kakaev@gmail.com}{ibrahim.kakaev@gmail.com}\sep 06 38 05 40 02\sep Albi / Toulouse\sep French citizen\sep Driving licence B\par\vspace{2.5pt}
+   \href{https://linkedin.com/in/ibrahim-kakaev-7b11282a0}{LinkedIn}\sep
+   \href{https://github.com/IbrahimKakaev}{GitHub}\sep
+   \href{https://ibrahimkakaev.github.io/en/}{Portfolio}\sep
+   \href{https://www.root-me.org/MIK_Sparrow?lang=fr}{Root-Me}}
+\end{minipage}%
+\hfill%
+\begin{minipage}[b]{2.35cm}\raggedleft
+  \IfFileExists{photo.PNG}{\includegraphics[width=2.35cm,height=2.75cm,keepaspectratio]{photo.PNG}}{}
+\end{minipage}
+
+% =====================================================================
+\cvsection{Profile}
+{\small 2nd-year Master's in Software Engineering. I build complete applications, from the Spring Boot or Rust API to the Angular interface, delivered tested: continuous integration, security analysis and a live demo. Strong interest in application security.}\par
+
+% =====================================================================
+\cvsection{Technical skills}
+\begin{grid}\setlength{\itemsep}{1.5pt}
+  \item[Languages]      {\small Java 21, TypeScript, JavaScript, Rust, Python, C++, PHP, SQL}
+  \item[Back-end]       {\small Spring Boot, Spring Security, JPA, Flyway, Jakarta EE, Node.js, Express.js, REST API, WebSocket, SSE}
+  \item[Front-end]      {\small Angular (signals, standalone components), RxJS, React}
+  \item[Data]           {\small PostgreSQL, pgvector, MongoDB, MySQL, SQLite}
+  \item[DevOps]         {\small Linux, Git, Docker, Docker Compose, GitHub Actions, CodeQL, Trivy, AWS}
+  \item[Testing, methods]{\small JUnit, Testcontainers, Jest, Vitest, PyTest\sep UML, MVC, Scrum, Jira}
+  \item[AI and security]{\small RAG, embeddings (ONNX), LLM APIs; JWT, OWASP, pentest (Nmap, Burp Suite, Metasploit)}
+\end{grid}
+
+% =====================================================================
+\cvsection{Projects}
+\begin{grid}
+  \item[2026]
+    \head{Sésame, AI-powered enterprise document search}{Java, Spring Boot, pgvector, Angular}
+    \begin{cvitems}
+      \item An LLM answers questions about PDFs and cites its sources, without ever receiving a passage the user is not allowed to see: filtering by groups in the SQL query, before any call to the model.
+      \item Isolation tests for every user-document pair on every route, leak tests on the request sent to the LLM, immediate revocation; documented threat model.
+      \item JWT with rotation and replay detection, audit log; 24 out of 24 sources retrieved in the evaluation; CI with CodeQL and Trivy.
+    \end{cvitems}
+    \links{\href{https://ibrahimkakaev.github.io/Sesame/}{Demo: ibrahimkakaev.github.io/Sesame}\sep \href{https://github.com/IbrahimKakaev/Sesame}{Code: github.com/IbrahimKakaev/Sesame}}
+  \item[2026]
+    \head{NetWatch IDS, real-time network intrusion detection}{Rust, axum, Angular}
+    \begin{cvitems}
+      \item Capture (libpcap) and detection engine in Rust: decoding of Ethernet, VLAN, IPv4/IPv6, TCP and UDP; detection of port scans, SYN floods and abnormal throughput over a sliding window, with bounded memory.
+      \item Angular dashboard over WebSocket (live traffic map), SQLite history; Rust and Angular tests in CI.
+    \end{cvitems}
+    \links{\href{https://ibrahimkakaev.github.io/NetWatch-IDS/}{Demo: ibrahimkakaev.github.io/NetWatch-IDS}\sep \href{https://github.com/IbrahimKakaev/NetWatch-IDS}{Code: github.com/IbrahimKakaev/NetWatch-IDS}}
+  \item[2026]
+    \head{CERISoNet, real-time social network}{Angular, Node.js, Socket.IO, MongoDB}
+    \begin{cvitems}
+      \item News feed, likes, comments and real-time presence; PostgreSQL for accounts, MongoDB for posts.
+      \item 269 tests (API, security, real time), CodeQL and Lighthouse in CI, single-command launch with Docker Compose.
+    \end{cvitems}
+    \links{\href{https://ibrahimkakaev.github.io/CERISoNet/}{Demo: ibrahimkakaev.github.io/CERISoNet}\sep \href{https://github.com/IbrahimKakaev/CERISoNet}{Code: github.com/IbrahimKakaev/CERISoNet}}
+  \item[2025]
+    \head{Pentest and offensive cybersecurity}{Kali Linux, Burp Suite, Metasploit}
+    \begin{cvitems}
+      \item 5 VulnHub machines compromised, 7 TryHackMe modules and 10 Root-Me challenges; 13 reports written (reconnaissance, exploitation, privilege escalation, remediation).
+    \end{cvitems}
+    \links{\href{https://ibrahimkakaev.github.io/en/reports.html}{Reports: ibrahimkakaev.github.io/en/reports.html}\sep \href{https://www.root-me.org/MIK_Sparrow?lang=fr}{Root-Me: MIK\_Sparrow}}
+\end{grid}
+
+% =====================================================================
+\cvsection{Professional experience}
+\begin{grid}
+  \item[2024 · 2 months]
+    \head{Full-stack developer, internship}{DSI Grand Albigeois, Albi}
+    \begin{cvitems}
+      \item Web search interface for the town hall's reception secretaries, used in production.
+      \item Structuring of data from scanned documents and database design.
+    \end{cvitems}
+    \tech{PHP, JavaScript, MySQL}
+\end{grid}
+
+% =====================================================================
+\cvsection{Education}
+\begin{grid}\setlength{\itemsep}{2pt}
+  \item[2024 -- 2027] \head{Master's degree in Computer Science, Software Engineering}{Avignon Université}
+  \item[2021 -- 2024] \head{Bachelor's degree (Licence) in Computer Science, Web Technology option}{INU Champollion, Albi}
+  \item[2019 -- 2021] \head{Baccalauréat, Computer Science and English specialities}{Lycée Lapérouse, Albi}
+\end{grid}
+
+% =====================================================================
+\cvsection{Other experience}
+\begin{grid}\setlength{\itemsep}{2pt}
+  \item[2020 -- 2024] \head{Youth activity leader and team lead}{CROUS, Grand Albigeois, Handiligue}
+  \item[2024 -- 2026] \head{General and logistics worker, temporary work}{Action, Leclerc Drive, Basic-Fit, Domino's}
+\end{grid}
+
+% =====================================================================
+\cvsection{Languages and interests}
+\begin{grid}\setlength{\itemsep}{1.5pt}
+  \item[Languages]  {\small French (native)\sep English (B2)\sep Russian (fluent)}
+  \item[Interests]  {\small Automation, weight training, hiking, music}
+\end{grid}
+
+\end{document}
