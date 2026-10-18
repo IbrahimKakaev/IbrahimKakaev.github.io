@@ -76,23 +76,25 @@
   var caption = canvas.parentNode.querySelector(".net-caption");
   var captionText = caption ? caption.textContent : "";
 
-  /* Placement en trois colonnes régulières : moi à gauche, les projets au milieu, les
-     technologies à droite. Les deux colonnes de nœuds partagent le même pas vertical et sont
-     centrées, et je suis au milieu : le schéma est symétrique de haut en bas. Les projets sans
-     technologie partagée vont aux deux extrémités ; les autres sont réordonnés avec les
-     technologies (méthode des barycentres) pour limiter les croisements. Calculé une fois. */
+  /* Arbre vertical : moi en haut, mes projets sur une rangée au milieu, les technologies sur
+     une rangée en bas, le tout centré et symétrique de gauche à droite. Les projets sans
+     technologie partagée vont aux deux bouts ; les autres sont réordonnés avec les technologies
+     (méthode des barycentres) pour limiter les croisements. Dans chaque rangée, les nœuds
+     voisins sont décalés en hauteur pour que leurs noms ne se chevauchent pas. Calculé une fois. */
   (function layout() {
     var hubs = nodes.filter(function (n) { return n.type === "hub"; });
     var techs = nodes.filter(function (n) { return n.type === "tech"; });
     var linked = hubs.filter(function (n) { return n.links.length > 1; });
     var loose = hubs.filter(function (n) { return n.links.length <= 1; });
-    var rows = Math.max(hubs.length, techs.length);
-    var step = rows > 1 ? 2 / (rows - 1) : 0;
+    var cols = Math.max(hubs.length, techs.length);
+    var step = cols > 1 ? 2 / (cols - 1) : 0;
 
-    function column(list, x) {
+    function row(list, y, shift) {
+      var mid = (list.length - 1) / 2;
       list.forEach(function (n, i) {
-        n.x = x;
-        n.y = (i - (list.length - 1) / 2) * step;
+        n.x = (i - mid) * step;
+        n.y = y;
+        n.lane = i % 2 ? shift : 0;   // un nœud sur deux décalé (en pixels) : les noms voisins ne se touchent pas
       });
     }
 
@@ -103,7 +105,7 @@
         var sum = 0, count = 0;
         n.links.forEach(function (l) {
           var o = other(n, l);
-          if (o.type === kind) { sum += o.y; count++; }
+          if (o.type === kind) { sum += o.x; count++; }
         });
         n.mean = count ? sum / count : 0;
         n.rank = i;
@@ -112,21 +114,21 @@
     }
 
     function placeHubs() {
-      var top = loose.filter(function (n, i) { return i % 2 === 0; });
-      var bottom = loose.filter(function (n, i) { return i % 2 === 1; });
-      column(top.concat(linked, bottom.reverse()), 0);
+      var left = loose.filter(function (n, i) { return i % 2 === 0; });
+      var right = loose.filter(function (n, i) { return i % 2 === 1; });
+      row(left.concat(linked, right.reverse()), -0.2, 58);
     }
 
     placeHubs();
     for (var it = 0; it < 4; it++) {
       byMean(techs, "hub");
-      column(techs, 1);
+      row(techs, 0.86, -40);
       byMean(linked, "tech");
       placeHubs();
     }
     byMean(techs, "hub");
-    column(techs, 1);
-    me.x = -1; me.y = 0;
+    row(techs, 0.86, -40);
+    me.x = 0; me.y = -1;
 
     nodes.forEach(function (n, i) {
       n.phase = i * 1.7;
@@ -134,12 +136,12 @@
     });
   })();
 
-  /* Les liens sont des courbes en S, tangentes à l'horizontale à chaque bout. */
+  /* Les liens sont des courbes en S, tangentes à la verticale à chaque bout. */
   function curve(l, t) {
-    var a = l.a, b = l.b, m = (b.px - a.px) / 2, u = 1 - t;
+    var a = l.a, b = l.b, m = (b.py - a.py) / 2, u = 1 - t;
     return {
-      x: u * u * u * a.px + 3 * u * u * t * (a.px + m) + 3 * u * t * t * (b.px - m) + t * t * t * b.px,
-      y: u * u * u * a.py + 3 * u * u * t * a.py + 3 * u * t * t * b.py + t * t * t * b.py
+      x: u * u * u * a.px + 3 * u * u * t * a.px + 3 * u * t * t * b.px + t * t * t * b.px,
+      y: u * u * u * a.py + 3 * u * u * t * (a.py + m) + 3 * u * t * t * (b.py - m) + t * t * t * b.py
     };
   }
 
@@ -173,13 +175,13 @@
   }
 
   function place(time) {
-    var padX = W < 520 ? 44 : 72;
-    var padY = 52;
+    var padX = W < 520 ? 40 : 64;
+    var padY = W < 520 ? 34 : 44;
     var scroll = Math.max(-40, -window.scrollY * 0.06);
     for (var i = 0; i < nodes.length; i++) {
       var n = nodes[i];
       n.px = padX + ((n.x + 1) / 2) * (W - 2 * padX) + shiftX + Math.sin(time * 0.0007 * n.freq + n.phase) * 2;
-      n.py = padY + ((n.y + 1) / 2) * (H - 2 * padY) + shiftY + scroll + Math.cos(time * 0.0006 * n.freq + n.phase) * 2;
+      n.py = padY + ((n.y + 1) / 2) * (H - 2 * padY) + (n.lane || 0) + shiftY + scroll + Math.cos(time * 0.0006 * n.freq + n.phase) * 2;
     }
   }
 
@@ -195,11 +197,12 @@
   function label(n, lit) {
     var hub = n.type !== "tech";
     var small = W < 520;
-    ctx.font = hub ? (small ? "700 13px Syne, sans-serif" : "700 16px Syne, sans-serif")
+    ctx.font = hub ? (small ? "700 12px Syne, sans-serif" : "700 16px Syne, sans-serif")
                    : (small ? '500 12px "IBM Plex Mono", monospace' : '500 14px "IBM Plex Mono", monospace');
     var tw = ctx.measureText(n.label).width;
     var x = Math.min(Math.max(n.px, tw / 2 + 3), W - tw / 2 - 3);
-    var y = hub ? n.py - (n.type === "me" ? 24 : 21) : n.py + 21;
+    var y = hub ? n.py - 21 : n.py + 21;
+    if (n.type === "me") { x = n.px + 20 + tw / 2; y = n.py; }   // mon nom à droite du nœud
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.lineJoin = "round";
@@ -222,10 +225,10 @@
       lit = active && (l.a === active || l.b === active);
       ctx.globalAlpha = active && !lit ? 0.3 : 1;
       ctx.strokeStyle = lit ? colors.text : colors.edge;
-      var m = (l.b.px - l.a.px) / 2;
+      var m = (l.b.py - l.a.py) / 2;
       ctx.beginPath();
       ctx.moveTo(l.a.px, l.a.py);
-      ctx.bezierCurveTo(l.a.px + m, l.a.py, l.b.px - m, l.b.py, l.b.px, l.b.py);
+      ctx.bezierCurveTo(l.a.px, l.a.py + m, l.b.px, l.b.py - m, l.b.px, l.b.py);
       ctx.stroke();
     }
 
