@@ -76,41 +76,72 @@
   var caption = canvas.parentNode.querySelector(".net-caption");
   var captionText = caption ? caption.textContent : "";
 
-  /* Placement en trois colonnes, comme un schéma de réseau : moi à gauche, les projets au
-     milieu (dans l'ordre de la page), les technologies à droite. Chaque technologie est
-     rangée à la hauteur moyenne de ses projets, ce qui limite les croisements de liens.
-     Calculé une fois, sans hasard. */
+  /* Placement en trois colonnes régulières : moi à gauche, les projets au milieu, les
+     technologies à droite. Les deux colonnes de nœuds partagent le même pas vertical et sont
+     centrées, et je suis au milieu : le schéma est symétrique de haut en bas. Les projets sans
+     technologie partagée vont aux deux extrémités ; les autres sont réordonnés avec les
+     technologies (méthode des barycentres) pour limiter les croisements. Calculé une fois. */
   (function layout() {
     var hubs = nodes.filter(function (n) { return n.type === "hub"; });
     var techs = nodes.filter(function (n) { return n.type === "tech"; });
+    var linked = hubs.filter(function (n) { return n.links.length > 1; });
+    var loose = hubs.filter(function (n) { return n.links.length <= 1; });
+    var rows = Math.max(hubs.length, techs.length);
+    var step = rows > 1 ? 2 / (rows - 1) : 0;
 
-    function spread(list, x) {
+    function column(list, x) {
       list.forEach(function (n, i) {
         n.x = x;
-        n.y = list.length > 1 ? (i / (list.length - 1)) * 2 - 1 : 0;
+        n.y = (i - (list.length - 1) / 2) * step;
       });
     }
 
-    me.x = -1; me.y = 0;
-    spread(hubs, -0.08);
-    techs.forEach(function (n, i) {
-      n.rank = i;
-      n.mean = 0;
-      n.low = -1;
-      n.links.forEach(function (l) {
-        var y = (l.a === n ? l.b : l.a).y;
-        n.mean += y / n.links.length;
-        n.low = Math.max(n.low, y);
+    function other(n, l) { return l.a === n ? l.b : l.a; }
+
+    function byMean(list, kind) {
+      list.forEach(function (n, i) {
+        var sum = 0, count = 0;
+        n.links.forEach(function (l) {
+          var o = other(n, l);
+          if (o.type === kind) { sum += o.y; count++; }
+        });
+        n.mean = count ? sum / count : 0;
+        n.rank = i;
       });
-    });
-    techs.sort(function (a, b) { return a.mean - b.mean || a.low - b.low || a.rank - b.rank; });
-    spread(techs, 1);
+      list.sort(function (a, b) { return a.mean - b.mean || a.rank - b.rank; });
+    }
+
+    function placeHubs() {
+      var top = loose.filter(function (n, i) { return i % 2 === 0; });
+      var bottom = loose.filter(function (n, i) { return i % 2 === 1; });
+      column(top.concat(linked, bottom.reverse()), 0);
+    }
+
+    placeHubs();
+    for (var it = 0; it < 4; it++) {
+      byMean(techs, "hub");
+      column(techs, 1);
+      byMean(linked, "tech");
+      placeHubs();
+    }
+    byMean(techs, "hub");
+    column(techs, 1);
+    me.x = -1; me.y = 0;
 
     nodes.forEach(function (n, i) {
       n.phase = i * 1.7;
       n.freq = 0.6 + (i % 4) * 0.18;
     });
   })();
+
+  /* Les liens sont des courbes en S, tangentes à l'horizontale à chaque bout. */
+  function curve(l, t) {
+    var a = l.a, b = l.b, m = (b.px - a.px) / 2, u = 1 - t;
+    return {
+      x: u * u * u * a.px + 3 * u * u * t * (a.px + m) + 3 * u * t * t * (b.px - m) + t * t * t * b.px,
+      y: u * u * u * a.py + 3 * u * u * t * a.py + 3 * u * t * t * b.py + t * t * t * b.py
+    };
+  }
 
   var seed = 11;
   function rnd() {
@@ -191,9 +222,10 @@
       lit = active && (l.a === active || l.b === active);
       ctx.globalAlpha = active && !lit ? 0.3 : 1;
       ctx.strokeStyle = lit ? colors.text : colors.edge;
+      var m = (l.b.px - l.a.px) / 2;
       ctx.beginPath();
       ctx.moveTo(l.a.px, l.a.py);
-      ctx.lineTo(l.b.px, l.b.py);
+      ctx.bezierCurveTo(l.a.px + m, l.a.py, l.b.px - m, l.b.py, l.b.px, l.b.py);
       ctx.stroke();
     }
 
@@ -202,19 +234,18 @@
     ctx.strokeStyle = colors.accent;
     for (i = 0; i < packets.length; i++) {
       var p = packets[i];
-      var from = p.dir > 0 ? p.link.a : p.link.b;
-      var to = p.dir > 0 ? p.link.b : p.link.a;
-      var x = from.px + (to.px - from.px) * p.t;
-      var y = from.py + (to.py - from.py) * p.t;
-      var tail = Math.max(0, p.t - 0.12);
+      var at = function (t) { return curve(p.link, p.dir > 0 ? t : 1 - t); };
+      var head = at(p.t);
       ctx.globalAlpha = 0.5;
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.moveTo(from.px + (to.px - from.px) * tail, from.py + (to.py - from.py) * tail);
-      ctx.lineTo(x, y);
+      for (var k = 4; k >= 0; k--) {
+        var q = at(Math.max(0, p.t - k * 0.03));
+        if (k === 4) ctx.moveTo(q.x, q.y); else ctx.lineTo(q.x, q.y);
+      }
       ctx.stroke();
       ctx.globalAlpha = 1;
-      ctx.fillRect(x - 3.5, y - 3.5, 7, 7);
+      ctx.fillRect(head.x - 3.5, head.y - 3.5, 7, 7);
     }
 
     for (i = 0; i < nodes.length; i++) {
