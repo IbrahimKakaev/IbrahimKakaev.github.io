@@ -36,11 +36,11 @@
     <div class="wrap top-in">
       <a class="brand" href="index.html" aria-label="Ibrahim Kakaev"><span class="brand-full">Ibrahim Kakaev</span><span class="brand-short">IK</span></a>
       <nav class="top-nav" aria-label="Sections">
-        <a href="#rampe">Now</a>
         <a href="#projects">Projects</a>
         <a href="#experience">Experience</a>
         <a href="#skills">Skills</a>
         <a href="#education">Education</a>
+        <a href="#rampe">Now</a>
         <a href="#contact">Contact</a>
       </nav>
       <nav class="lang" aria-label="Language">
@@ -78,80 +78,6 @@
       </div>
     </div>
   </section>
-
-    <section id="rampe" class="section now" aria-labelledby="rampe-titre">
-      <div class="wrap">
-        <h2 id="rampe-titre">What I'm working on right now</h2>
-        <div class="now-head">
-          <h3 class="now-name">Rampe</h3>
-          <p class="now-status"><span class="now-dot" aria-hidden="true"></span>In progress, since October 2026</p>
-        </div>
-        <p class="now-lead">Automated web accessibility pre-audit, mapped to the criteria of RGAA 4.1.2, the French accessibility standard, for small and medium-sized businesses.</p>
-
-        <div class="now-grid">
-          <div class="now-text">
-            <h4>The problem and the target</h4>
-            <p>A small business that wants to know where its website stands on accessibility often has neither the time nor the budget for a full audit. Rampe gives it a first assessment: the crawler goes through the site, runs the automatable tests (axe-core), maps each defect to the relevant RGAA criterion, explains the fix in plain French and tracks progress over time.</p>
-            <p class="now-caveat">It is a pre-audit: an automated test never proves RGAA conformance and does not replace a manual audit. Rampe always states how many criteria remain to be checked by hand.</p>
-
-            <h4>What Rampe does</h4>
-            <ul class="now-list">
-                <li>Polite crawling: follows robots.txt and the sitemap, one page per second at most.</li>
-                <li>Tagged PDF report, readable by a screen reader.</li>
-                <li>Scheduled scans, with an e-mail alert when a regression appears.</li>
-                <li>Manual audit of the 106 criteria, with a conformance rate computed with the official method and a draft accessibility statement.</li>
-                <li>Organisations, roles, invitations and data isolation between customers.</li>
-            </ul>
-          </div>
-          <figure class="now-shot">
-            <img src="../images/rampe-scan.png" width="1280" height="860" loading="lazy" decoding="async" alt="Scan results page in Rampe, on a test site, with a French interface. Automated pre-audit score of 95%, 105 checks passed, 6 failed, 15 pages analysed. A notice states that the score does not measure RGAA conformance and that 105 criteria remain to be checked manually.">
-            <figcaption>Scan results in Rampe, on a test site (French interface).</figcaption>
-          </figure>
-        </div>
-
-        <h4>Technical highlights</h4>
-        <ul class="now-list now-points">
-              <li><strong>Crawler hardened against SSRF attacks.</strong> Chromium runs in a container with no network access; an egress proxy resolves the host name once and connects to the verified address, which defeats DNS rebinding; only public addresses are allowed.</li>
-              <li><strong>Customer isolation proven by a test.</strong> It reads every API route (OpenAPI) and checks that none leaks data from one organisation to another.</li>
-              <li><strong>Three levels of testing.</strong> About 500 unit tests, about 70 integration tests against real PostgreSQL and Valkey, 75 end-to-end tests; 100% coverage of the business rules.</li>
-              <li><strong>An accessible application itself.</strong> No axe violation on any page and a complete keyboard-only journey, checked in continuous integration.</li>
-              <li><strong>Web security.</strong> Server-side sessions, argon2id, CSRF protection, strict content security policy, rate limiting.</li>
-              <li><strong>Deployment.</strong> Docker Compose behind Caddy (automatic HTTPS), daily database backup, structured logs.</li>
-        </ul>
-
-        <h4>Method, status and next steps</h4>
-        <p class="now-p">Specification, a plan approved before any code, then 7 milestones (J0 to J6) with acceptance criteria, each merged after review with CI green. Every technical choice is recorded with its reason. Built with Claude Code, an AI coding agent, within this framework.</p>
-        <p class="now-p">Second-year Master's project in Software Engineering (Avignon Université), started in October 2026. All 7 milestones are done and the demo is online. Next steps: interviews with small businesses to validate the need and the price, then a redesign of the interface.</p>
-
-        <div class="now-foot">
-          <div>
-            <h4>Links</h4>
-            <ul class="now-links">
-              <li><a href="https://rampe-demo.duckdns.org">Rampe live demo (in French)</a></li>
-              <li><a href="https://github.com/IbrahimKakaev/Rampe">Rampe source code on GitHub</a></li>
-              <li><a href="https://github.com/IbrahimKakaev/Rampe/blob/main/docs/ARCHITECTURE.md">Rampe architecture explained (in French)</a></li>
-              <li><a href="https://github.com/IbrahimKakaev/Rampe/blob/main/docs/articles/ssrf-robot-exploration.md">Draft article: protecting the crawler against SSRF attacks (in French)</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4>Technologies</h4>
-            <ul class="now-tags">
-              <li>TypeScript strict</li>
-              <li>Angular 22</li>
-              <li>NestJS 12</li>
-              <li>Prisma 7</li>
-              <li>PostgreSQL 18</li>
-              <li>BullMQ</li>
-              <li>Valkey</li>
-              <li>Playwright</li>
-              <li>axe-core</li>
-              <li>Docker Compose</li>
-              <li>GitHub Actions</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <section id="projects" class="section">
       <div class="wrap">
@@ -326,6 +252,80 @@
           </li>
         </ol>
         <p class="aside">Languages: French (native), Russian (fluent), English (B2). Interests: automation, weight training, hiking, music.</p>
+      </div>
+    </section>
+
+    <section id="rampe" class="section now" aria-labelledby="rampe-titre">
+      <div class="wrap">
+        <h2 id="rampe-titre">What I'm working on right now</h2>
+        <div class="now-head">
+          <h3 class="now-name">Rampe</h3>
+          <p class="now-status"><span class="now-dot" aria-hidden="true"></span>In progress, since October 2026</p>
+        </div>
+        <p class="now-lead">Automated web accessibility pre-audit, mapped to the criteria of RGAA 4.1.2, the French accessibility standard, for small and medium-sized businesses.</p>
+
+        <div class="now-grid">
+          <div class="now-text">
+            <h4>The problem and the target</h4>
+            <p>A small business that wants to know where its website stands on accessibility often has neither the time nor the budget for a full audit. Rampe gives it a first assessment: the crawler goes through the site, runs the automatable tests (axe-core), maps each defect to the relevant RGAA criterion, explains the fix in plain French and tracks progress over time.</p>
+            <p class="now-caveat">It is a pre-audit: an automated test never proves RGAA conformance and does not replace a manual audit. Rampe always states how many criteria remain to be checked by hand.</p>
+
+            <h4>What Rampe does</h4>
+            <ul class="now-list">
+                <li>Polite crawling: follows robots.txt and the sitemap, one page per second at most.</li>
+                <li>Tagged PDF report, readable by a screen reader.</li>
+                <li>Scheduled scans, with an e-mail alert when a regression appears.</li>
+                <li>Manual audit of the 106 criteria, with a conformance rate computed with the official method and a draft accessibility statement.</li>
+                <li>Organisations, roles, invitations and data isolation between customers.</li>
+            </ul>
+          </div>
+          <figure class="now-shot">
+            <img src="../images/rampe-scan.png" width="1280" height="860" loading="lazy" decoding="async" alt="Scan results page in Rampe, on a test site, with a French interface. Automated pre-audit score of 95%, 105 checks passed, 6 failed, 15 pages analysed. A notice states that the score does not measure RGAA conformance and that 105 criteria remain to be checked manually.">
+            <figcaption>Scan results in Rampe, on a test site (French interface).</figcaption>
+          </figure>
+        </div>
+
+        <h4>Technical highlights</h4>
+        <ul class="now-list now-points">
+              <li><strong>Crawler hardened against SSRF attacks.</strong> Chromium runs in a container with no network access; an egress proxy resolves the host name once and connects to the verified address, which defeats DNS rebinding; only public addresses are allowed.</li>
+              <li><strong>Customer isolation proven by a test.</strong> It reads every API route (OpenAPI) and checks that none leaks data from one organisation to another.</li>
+              <li><strong>Three levels of testing.</strong> About 500 unit tests, about 70 integration tests against real PostgreSQL and Valkey, 75 end-to-end tests; 100% coverage of the business rules.</li>
+              <li><strong>An accessible application itself.</strong> No axe violation on any page and a complete keyboard-only journey, checked in continuous integration.</li>
+              <li><strong>Web security.</strong> Server-side sessions, argon2id, CSRF protection, strict content security policy, rate limiting.</li>
+              <li><strong>Deployment.</strong> Docker Compose behind Caddy (automatic HTTPS), daily database backup, structured logs.</li>
+        </ul>
+
+        <h4>Method, status and next steps</h4>
+        <p class="now-p">Specification, a plan approved before any code, then 7 milestones (J0 to J6) with acceptance criteria, each merged after review with CI green. Every technical choice is recorded with its reason. Built with Claude Code, an AI coding agent, within this framework.</p>
+        <p class="now-p">Second-year Master's project in Software Engineering (Avignon Université), started in October 2026. All 7 milestones are done and the demo is online. Next steps: interviews with small businesses to validate the need and the price, then a redesign of the interface.</p>
+
+        <div class="now-foot">
+          <div>
+            <h4>Links</h4>
+            <ul class="now-links">
+              <li><a href="https://rampe-demo.duckdns.org">Rampe live demo (in French)</a></li>
+              <li><a href="https://github.com/IbrahimKakaev/Rampe">Rampe source code on GitHub</a></li>
+              <li><a href="https://github.com/IbrahimKakaev/Rampe/blob/main/docs/ARCHITECTURE.md">Rampe architecture explained (in French)</a></li>
+              <li><a href="https://github.com/IbrahimKakaev/Rampe/blob/main/docs/articles/ssrf-robot-exploration.md">Draft article: protecting the crawler against SSRF attacks (in French)</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Technologies</h4>
+            <ul class="now-tags">
+              <li>TypeScript strict</li>
+              <li>Angular 22</li>
+              <li>NestJS 12</li>
+              <li>Prisma 7</li>
+              <li>PostgreSQL 18</li>
+              <li>BullMQ</li>
+              <li>Valkey</li>
+              <li>Playwright</li>
+              <li>axe-core</li>
+              <li>Docker Compose</li>
+              <li>GitHub Actions</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
