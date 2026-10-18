@@ -11,7 +11,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[sfdefault]{FiraSans}
-\usepackage[a4paper,top=1.05cm,bottom=0.9cm,left=1.3cm,right=1.3cm]{geometry}
+\usepackage[a4paper,top=0.6cm,bottom=0.45cm,left=1.3cm,right=1.3cm]{geometry}
 \usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{enumitem}
@@ -42,16 +42,16 @@
 
 % Section title: thick bar, spaced heading, rule to the edge
 \newcommand{\cvsection}[1]{%
-  \vspace{7pt}%
+  \vspace{4pt}%
   {\color{ink}\rule[-0.5pt]{2.4pt}{9pt}}\hspace{6pt}%
   {\small\bfseries\MakeUppercase{#1}}\hspace{8pt}%
   {\color{hair}\leaders\hrule height 3.4pt depth -2.9pt\hfill}\par
-  \vspace{3.5pt}}
+  \vspace{2pt}}
 
 % Gutter block: label (date, heading) on the left, content on the right
 \newenvironment{grid}{%
   \begin{list}{}{\setlength{\leftmargin}{\gut}\setlength{\labelwidth}{\gut-8pt}%
-    \setlength{\labelsep}{8pt}\setlength{\itemsep}{4pt}\setlength{\topsep}{0pt}%
+    \setlength{\labelsep}{8pt}\setlength{\itemsep}{2.5pt}\setlength{\topsep}{0pt}%
     \setlength{\parsep}{0pt}\setlength{\partopsep}{0pt}%
     \renewcommand{\makelabel}[1]{\makebox[\labelwidth][l]{\small\color{soft}##1}}}}
   {\end{list}}
@@ -73,9 +73,9 @@
 %  HEADER
 % =====================================================================
 \begin{minipage}[b]{\textwidth-2.6cm}
-  {\fontsize{27}{29}\selectfont\bfseries Ibrahim Kakaev}\par\vspace{5pt}
+  {\fontsize{27}{29}\selectfont\bfseries Ibrahim Kakaev}\par\vspace{3pt}
   {\large Full-stack developer Java / Spring Boot · Angular\hspace{0.45em}·\hspace{0.45em}6-month final-year internship}\par\vspace{3pt}
-  {\small\bfseries From January 2027\hspace{0.45em}·\hspace{0.45em}Available immediately, earlier start possible}\par\vspace{6pt}
+  {\small\bfseries From January 2027\hspace{0.45em}·\hspace{0.45em}Available immediately, earlier start possible}\par\vspace{4pt}
   {\small
    \href{mailto:ibrahim.kakaev@gmail.com}{ibrahim.kakaev@gmail.com}\sep 06 38 05 40 02\sep Albi / Toulouse\sep French citizen\sep Driving licence B\par\vspace{2.5pt}
    \href{https://linkedin.com/in/ibrahim-kakaev-7b11282a0}{LinkedIn}\sep
@@ -107,6 +107,13 @@
 % =====================================================================
 \cvsection{Projects}
 \begin{grid}
+  \item[2026 · ongoing]
+    \head{Rampe, automated web accessibility pre-audit (RGAA 4.1.2) for SMEs}{TypeScript, Angular, NestJS}
+    \begin{cvitems}
+      \item A crawler (axe-core) maps each defect to its RGAA criterion, explains the fix and tracks progress; tagged PDF report, scheduled scans, manual audit of the 106 criteria.
+      \item Crawler hardened against SSRF (Chromium without network, egress proxy against DNS rebinding), organisation isolation tested on every API route; about 500 unit, 70 integration and 75 end-to-end tests.
+    \end{cvitems}
+    \links{\href{https://rampe-demo.duckdns.org}{Demo: rampe-demo.duckdns.org}\sep \href{https://github.com/IbrahimKakaev/Rampe}{Code: github.com/IbrahimKakaev/Rampe}}
   \item[2026]
     \head{Sésame, AI-powered enterprise document search}{Java, Spring Boot, pgvector, Angular}
     \begin{cvitems}
